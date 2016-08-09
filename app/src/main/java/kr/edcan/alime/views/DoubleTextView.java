@@ -36,7 +36,7 @@ public class DoubleTextView extends LinearLayout {
     }
 
     private void getAttrs(AttributeSet attrs) {
-        TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.CartaTagView);
+        TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.DoubleTextView);
         setTypedArray(array);
     }
 

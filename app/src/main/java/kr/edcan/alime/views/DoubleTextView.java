@@ -91,4 +91,12 @@ public class DoubleTextView extends LinearLayout {
     public void setPrimaryText(String primaryText) {
         mainTextView.setText(primaryText);
     }
+
+    public void setPrimaryColor(int primaryColor) {
+        mainTextView.setTextColor(primaryColor);
+    }
+
+    public void setSubColor(int subColor) {
+        subTextView.setTextColor(subColor);
+    }
 }

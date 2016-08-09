@@ -4,4 +4,12 @@
         <attr name="themeColor" format="reference|color" />
         <attr name="fullMode" format="reference|boolean" />
     </declare-styleable>
+    <declare-styleable name="DoubleTextView">
+        <attr name="mainText" format="string" />
+        <attr name="subText" format="string" />
+        <attr name="mainColor" format="reference|color" />
+        <attr name="subColor" format="reference|color" />
+        <attr name="mainTextSize" format="reference|dimension" />
+        <attr name="subTextSize" format="reference|dimension" />
+    </declare-styleable>
 </resources>

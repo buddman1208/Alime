@@ -5,8 +5,8 @@
         <attr name="fullMode" format="reference|boolean" />
     </declare-styleable>
     <declare-styleable name="DoubleTextView">
-        <attr name="mainText" format="string" />
-        <attr name="subText" format="string" />
+        <attr name="mainText" format="reference|string" />
+        <attr name="subText" format="reference|string" />
         <attr name="mainColor" format="reference|color" />
         <attr name="subColor" format="reference|color" />
         <attr name="mainTextSize" format="reference|dimension" />

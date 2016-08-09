@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -43,8 +44,8 @@ public class DoubleTextView extends LinearLayout {
     private void setTypedArray(TypedArray array) {
         primaryText = array.getString(R.styleable.DoubleTextView_mainText);
         subText = array.getString(R.styleable.DoubleTextView_subText);
-        primaryColor = array.getInt(R.styleable.DoubleTextView_mainColor, res.getColor(R.color.notSelectedTextColor));
-        subColor = array.getInt(R.styleable.DoubleTextView_subColor, Color.WHITE);
+        primaryColor = array.getColor(R.styleable.DoubleTextView_mainColor, res.getColor(R.color.notSelectedTextColor));
+        subColor = array.getColor(R.styleable.DoubleTextView_subColor, Color.WHITE);
         mainTextSize = array.getDimension(R.styleable.DoubleTextView_mainTextSize, 18);
         subTextSize = array.getDimension(R.styleable.DoubleTextView_subTextSize, 25);
 
@@ -70,6 +71,7 @@ public class DoubleTextView extends LinearLayout {
         subParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         subParam.setMargins(0, 5, 0, 0);
         subTextView.setLayoutParams(subParam);
+        subTextView.setTypeface(null, Typeface.BOLD);
         addView(mainTextView);
         addView(subTextView);
     }

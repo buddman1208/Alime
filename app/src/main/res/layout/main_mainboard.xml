@@ -25,14 +25,14 @@
             <kr.edcan.alime.views.DoubleTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="30dp"
                 carta:mainText="참가자명"
                 carta:subText="김영환" />
 
             <kr.edcan.alime.views.DoubleTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="30dp"
                 carta:mainText="대회일"
                 carta:subColor="@color/colorPrimary"
                 carta:subText="2016.09.05" />

@@ -1,4 +1,4 @@
-package kr.edcan.alime;
+package kr.edcan.alime.activity;
 
 import android.databinding.DataBindingUtil;
 import android.graphics.PorterDuff;
@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import kr.edcan.alime.R;
 import kr.edcan.alime.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

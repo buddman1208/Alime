@@ -1,6 +1,7 @@
 package kr.edcan.alime;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
         mainTabLayout.setupWithViewPager(mainPager);
+        mainBind.mainDrawerToggle.setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
     }
 
     public static class MainFragment extends Fragment {

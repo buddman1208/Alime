@@ -16,20 +16,20 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <kr.edcan.alime.views.DoubleTextView
+            <kr.edcan.alime.views.CartaDoubleTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 carta:mainText="참가 분야"
                 carta:subText="게임" />
 
-            <kr.edcan.alime.views.DoubleTextView
+            <kr.edcan.alime.views.CartaDoubleTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 carta:mainText="참가자명"
                 carta:subText="김영환" />
 
-            <kr.edcan.alime.views.DoubleTextView
+            <kr.edcan.alime.views.CartaDoubleTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"

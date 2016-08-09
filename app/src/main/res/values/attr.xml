@@ -4,7 +4,7 @@
         <attr name="themeColor" format="reference|color" />
         <attr name="fullMode" format="reference|boolean" />
     </declare-styleable>
-    <declare-styleable name="DoubleTextView">
+    <declare-styleable name="CartaDoubleTextView">
         <attr name="mainText" format="reference|string" />
         <attr name="subText" format="reference|string" />
         <attr name="mainColor" format="reference|color" />

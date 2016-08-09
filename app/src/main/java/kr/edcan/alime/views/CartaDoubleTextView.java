@@ -16,7 +16,7 @@ import kr.edcan.alime.R;
 /**
  * Created by JunseokOh on 2016. 8. 9..
  */
-public class DoubleTextView extends LinearLayout {
+public class CartaDoubleTextView extends LinearLayout {
 
     Context c;
     String primaryText, subText;
@@ -26,7 +26,7 @@ public class DoubleTextView extends LinearLayout {
     LayoutParams subParam;
     Resources res;
 
-    public DoubleTextView(Context context, AttributeSet attrs) {
+    public CartaDoubleTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.c = context;
         setOrientation(LinearLayout.VERTICAL);
@@ -37,17 +37,17 @@ public class DoubleTextView extends LinearLayout {
     }
 
     private void getAttrs(AttributeSet attrs) {
-        TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.DoubleTextView);
+        TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.CartaDoubleTextView);
         setTypedArray(array);
     }
 
     private void setTypedArray(TypedArray array) {
-        primaryText = array.getString(R.styleable.DoubleTextView_mainText);
-        subText = array.getString(R.styleable.DoubleTextView_subText);
-        primaryColor = array.getColor(R.styleable.DoubleTextView_mainColor, res.getColor(R.color.notSelectedTextColor));
-        subColor = array.getColor(R.styleable.DoubleTextView_subColor, Color.WHITE);
-        mainTextSize = array.getDimension(R.styleable.DoubleTextView_mainTextSize, 18);
-        subTextSize = array.getDimension(R.styleable.DoubleTextView_subTextSize, 25);
+        primaryText = array.getString(R.styleable.CartaDoubleTextView_mainText);
+        subText = array.getString(R.styleable.CartaDoubleTextView_subText);
+        primaryColor = array.getColor(R.styleable.CartaDoubleTextView_mainColor, res.getColor(R.color.notSelectedTextColor));
+        subColor = array.getColor(R.styleable.CartaDoubleTextView_subColor, Color.WHITE);
+        mainTextSize = array.getDimension(R.styleable.CartaDoubleTextView_mainTextSize, 18);
+        subTextSize = array.getDimension(R.styleable.CartaDoubleTextView_subTextSize, 25);
 
         mainTextView.setText(primaryText);
         mainTextView.setTextColor(primaryColor);

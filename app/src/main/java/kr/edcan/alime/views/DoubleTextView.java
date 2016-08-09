@@ -75,4 +75,20 @@ public class DoubleTextView extends LinearLayout {
         addView(mainTextView);
         addView(subTextView);
     }
+
+    public String getSubText() {
+        return subTextView.getText().toString();
+    }
+
+    public String getPrimaryText() {
+        return mainTextView.getText().toString();
+    }
+
+    public void setSubText(String subText) {
+        subTextView.setText(subText);
+    }
+
+    public void setPrimaryText(String primaryText) {
+        mainTextView.setText(primaryText);
+    }
 }

@@ -1,12 +1,13 @@
 package kr.edcan.alime.views;
 
-import android.content.Context;
+import  android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.RectF;
+import android.support.v4.view.MarginLayoutParamsCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -55,8 +56,9 @@ public class CartaTagView extends TextView {
     public void setView() {
         setTextColor((fullMode) ? Color.WHITE : color);
         setGravity(Gravity.CENTER);
-        setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
+//        ViewGroup.MarginLayoutParams mMargin =new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        mMargin.setMargins(20, 0, 20, 0);
+//        setLayoutParams(mMargin);
     }
 
     @Override

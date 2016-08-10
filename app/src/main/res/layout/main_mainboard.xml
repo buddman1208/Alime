@@ -86,7 +86,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/mainDashboardTime"
                 carta:mainText="AM"
-                carta:mainTextSize="14dp"
+                carta:mainTextSize="13dp"
                 carta:subText="게임 개발"
                 carta:subTextSize="18sp"
                 carta:textMargin="0dp"/>

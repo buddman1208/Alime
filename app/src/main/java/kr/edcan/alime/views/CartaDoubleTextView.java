@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,6 +20,7 @@ public class CartaDoubleTextView extends LinearLayout {
 
     Context c;
     String primaryText, subText;
+    float pxConvert;
     int primaryColor, subColor, topMargin;
     float mainTextSize, subTextSize;
     TextView mainTextView, subTextView;
@@ -33,6 +33,7 @@ public class CartaDoubleTextView extends LinearLayout {
         setOrientation(LinearLayout.VERTICAL);
         setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         res = context.getResources();
+        pxConvert = res.getDisplayMetrics().scaledDensity;
         setView();
         getAttrs(attrs);
     }
@@ -47,16 +48,16 @@ public class CartaDoubleTextView extends LinearLayout {
         subText = array.getString(R.styleable.CartaDoubleTextView_subText);
         primaryColor = array.getColor(R.styleable.CartaDoubleTextView_mainColor, res.getColor(R.color.notSelectedTextColor));
         subColor = array.getColor(R.styleable.CartaDoubleTextView_subColor, Color.WHITE);
-        mainTextSize = array.getDimension(R.styleable.CartaDoubleTextView_mainTextSize, 55);
-        subTextSize = array.getDimension(R.styleable.CartaDoubleTextView_subTextSize, 75);
+        mainTextSize = array.getLayoutDimension(R.styleable.CartaDoubleTextView_mainTextSize, 40)/pxConvert;
+        subTextSize = array.getLayoutDimension(R.styleable.CartaDoubleTextView_subTextSize, 50)/pxConvert;
         topMargin = array.getLayoutDimension(R.styleable.CartaDoubleTextView_textMargin, 10);
 
         mainTextView.setText(primaryText);
         mainTextView.setTextColor(primaryColor);
-        mainTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mainTextSize);
+        mainTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mainTextSize);
         subTextView.setText(subText);
         subTextView.setTextColor(subColor);
-        subTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, subTextSize);
+        subTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, subTextSize);
         subParam.setMargins(0, topMargin, 0, 0);
         subTextView.setLayoutParams(subParam);
         array.recycle();
@@ -71,9 +72,9 @@ public class CartaDoubleTextView extends LinearLayout {
     private void setView() {
         mainTextView = new TextView(c);
         subTextView = new TextView(c);
-        mainTextView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        subParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
+        mainTextView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        subParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//
         subTextView.setTypeface(null, Typeface.BOLD);
         addView(mainTextView);
         addView(subTextView);

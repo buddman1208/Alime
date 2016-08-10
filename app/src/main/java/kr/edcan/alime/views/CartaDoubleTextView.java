@@ -33,7 +33,7 @@ public class CartaDoubleTextView extends LinearLayout {
         setOrientation(LinearLayout.VERTICAL);
         setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         res = context.getResources();
-        pxConvert = res.getDisplayMetrics().scaledDensity;
+        pxConvert = res.getDisplayMetrics().density;
         setView();
         getAttrs(attrs);
     }
@@ -48,16 +48,16 @@ public class CartaDoubleTextView extends LinearLayout {
         subText = array.getString(R.styleable.CartaDoubleTextView_subText);
         primaryColor = array.getColor(R.styleable.CartaDoubleTextView_mainColor, res.getColor(R.color.notSelectedTextColor));
         subColor = array.getColor(R.styleable.CartaDoubleTextView_subColor, Color.WHITE);
-        mainTextSize = array.getLayoutDimension(R.styleable.CartaDoubleTextView_mainTextSize, 40)/pxConvert;
-        subTextSize = array.getLayoutDimension(R.styleable.CartaDoubleTextView_subTextSize, 50)/pxConvert;
+        mainTextSize = array.getDimensionPixelSize(R.styleable.CartaDoubleTextView_mainTextSize, 30) / pxConvert;
+        subTextSize = array.getDimensionPixelSize(R.styleable.CartaDoubleTextView_subTextSize, 40) / pxConvert;
         topMargin = array.getLayoutDimension(R.styleable.CartaDoubleTextView_textMargin, 10);
 
         mainTextView.setText(primaryText);
         mainTextView.setTextColor(primaryColor);
-        mainTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mainTextSize);
+        mainTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mainTextSize);
         subTextView.setText(subText);
         subTextView.setTextColor(subColor);
-        subTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, subTextSize);
+        subTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, subTextSize);
         subParam.setMargins(0, topMargin, 0, 0);
         subTextView.setLayoutParams(subParam);
         array.recycle();

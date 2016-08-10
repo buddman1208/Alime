@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:carta="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    android:orientation="vertical"
+    android:padding="@dimen/common_padding">
 
+    <kr.edcan.alime.views.CartaDoubleTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        carta:mainColor="@color/colorPrimary"
+        carta:mainText="선수 시상"
+        carta:mainTextSize="18dp"
+        carta:subColor="@android:color/white"
+        carta:subText="입상"
+        android:layout_marginBottom="@dimen/common_padding"
+        carta:subTextSize="16dp"
+        carta:textMargin="10dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mainPrizeRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true" />
 </LinearLayout>

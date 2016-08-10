@@ -47,8 +47,8 @@ public class CartaDoubleTextView extends LinearLayout {
         subText = array.getString(R.styleable.CartaDoubleTextView_subText);
         primaryColor = array.getColor(R.styleable.CartaDoubleTextView_mainColor, res.getColor(R.color.notSelectedTextColor));
         subColor = array.getColor(R.styleable.CartaDoubleTextView_subColor, Color.WHITE);
-        mainTextSize = array.getDimension(R.styleable.CartaDoubleTextView_mainTextSize, 18);
-        subTextSize = array.getDimension(R.styleable.CartaDoubleTextView_subTextSize, 25);
+        mainTextSize = array.getDimension(R.styleable.CartaDoubleTextView_mainTextSize, 55);
+        subTextSize = array.getDimension(R.styleable.CartaDoubleTextView_subTextSize, 75);
 
         mainTextView.setText(primaryText);
         mainTextView.setTextColor(primaryColor);

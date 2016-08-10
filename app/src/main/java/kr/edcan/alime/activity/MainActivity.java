@@ -8,7 +8,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     String[] titleArr = new String[]{"메인 보드", "공지사항", "질문과 답변", "시상 및 특전"};
     ActivityMainBinding mainBind;
     ViewPager mainPager;
+    DrawerLayout mainDrawer;
     TabLayout mainTabLayout;
     LinearLayout mainToolbar;
 
@@ -38,10 +41,17 @@ public class MainActivity extends AppCompatActivity {
         mainPager = mainBind.mainViewPager;
         mainTabLayout = mainBind.mainTabLayout;
         mainToolbar = mainBind.mainToolbar;
+        mainDrawer = mainBind.mainDrawer;
 
         mainPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
         mainTabLayout.setupWithViewPager(mainPager);
         mainBind.mainDrawerToggle.setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+        mainBind.mainDrawerToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainDrawer.openDrawer(GravityCompat.START);
+            }
+        });
     }
 
     public static class MainFragment extends Fragment {

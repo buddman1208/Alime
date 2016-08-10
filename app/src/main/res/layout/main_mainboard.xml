@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <android.support.v4.widget.NestedScrollView
+    <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -17,12 +17,14 @@
             android:orientation="horizontal">
 
             <kr.edcan.alime.views.CartaDoubleTextView
+                android:id="@+id/mainDashboardCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 carta:mainText="참가 분야"
                 carta:subText="게임" />
 
             <kr.edcan.alime.views.CartaDoubleTextView
+                android:id="@+id/mainDashboardUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -30,13 +32,72 @@
                 carta:subText="김영환" />
 
             <kr.edcan.alime.views.CartaDoubleTextView
+                android:id="@+id/mainDashboardCompDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 carta:mainText="대회일"
                 carta:subColor="@color/colorPrimary"
                 carta:subText="2016.09.05" />
-
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/round_square_10dp"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <kr.edcan.alime.views.CartaDoubleTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            carta:mainColor="@color/colorPrimary"
+            carta:mainText="2016 제 51회 전국기능경기대회"
+            carta:subText="58일 남음" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/notSelectedTextColor" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/mainDashboardTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="09:42"
+                android:textColor="@color/colorPrimary"
+                android:textSize="65sp" />
+
+            <kr.edcan.alime.views.CartaDoubleTextView
+                android:id="@+id/mainDashboardTimeInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/mainDashboardTime"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/mainDashboardTime"
+                carta:mainText="AM"
+                carta:mainTextSize="7sp"
+                carta:subText="게임 개발"
+                carta:subTextSize="7sp" />
+        </RelativeLayout>
+
+        <kr.edcan.alime.views.CartaTagView
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            carta:fullMode="true"
+            android:text="asdf"
+            carta:themeColor="#aa0000" />
+    </LinearLayout>
 </LinearLayout>

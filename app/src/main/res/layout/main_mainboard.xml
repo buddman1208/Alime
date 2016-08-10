@@ -122,27 +122,31 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/round_square_10dp_fullmode"
-            android:padding="16dp">
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_main_rules" />
 
                 <kr.edcan.alime.views.CartaDoubleTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     carta:mainColor="#000"
                     carta:mainText="경기"
-                    carta:mainTextSize="15dp"
+                    carta:mainTextSize="13dp"
                     carta:subColor="#000"
                     carta:subText="운영수칙 보기"
-                    carta:subTextSize="15dp"
+                    carta:subTextSize="13dp"
                     carta:textMargin="0dp"></kr.edcan.alime.views.CartaDoubleTextView>
             </LinearLayout>
         </RelativeLayout>
@@ -153,28 +157,32 @@
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:background="@drawable/round_square_10dp"
-            android:padding="16dp">
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_main_tips" />
 
                 <kr.edcan.alime.views.CartaDoubleTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     carta:mainColor="@color/colorPrimary"
                     carta:mainText="경기관련"
-                    carta:mainTextSize="15dp"
+                    carta:mainTextSize="13dp"
                     carta:subColor="@color/colorPrimary"
                     carta:subText="유용한 정보"
-                    carta:subTextSize="15dp"
-                    carta:textMargin="0dp"/>
+                    carta:subTextSize="13dp"
+                    carta:textMargin="0dp" />
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

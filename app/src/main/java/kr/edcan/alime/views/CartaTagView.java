@@ -9,6 +9,8 @@ import android.graphics.Point;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import kr.edcan.alime.R;
@@ -20,7 +22,7 @@ public class CartaTagView extends TextView {
     boolean fullMode = false;
     int color = Color.BLACK;
     int height, width;
-
+    LinearLayout.LayoutParams thisParam;
     private Paint innerPaint, bgPaint;
 
     public CartaTagView(Context context) {
@@ -53,6 +55,8 @@ public class CartaTagView extends TextView {
     public void setView() {
         setTextColor((fullMode) ? Color.WHITE : color);
         setGravity(Gravity.CENTER);
+        setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
     }
 
     @Override

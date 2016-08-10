@@ -21,7 +21,7 @@ public class CartaDoubleTextView extends LinearLayout {
 
     Context c;
     String primaryText, subText;
-    int primaryColor, subColor;
+    int primaryColor, subColor, topMargin;
     float mainTextSize, subTextSize;
     TextView mainTextView, subTextView;
     LayoutParams subParam;
@@ -49,6 +49,7 @@ public class CartaDoubleTextView extends LinearLayout {
         subColor = array.getColor(R.styleable.CartaDoubleTextView_subColor, Color.WHITE);
         mainTextSize = array.getDimension(R.styleable.CartaDoubleTextView_mainTextSize, 55);
         subTextSize = array.getDimension(R.styleable.CartaDoubleTextView_subTextSize, 75);
+        topMargin = array.getLayoutDimension(R.styleable.CartaDoubleTextView_textMargin, 10);
 
         mainTextView.setText(primaryText);
         mainTextView.setTextColor(primaryColor);
@@ -56,6 +57,8 @@ public class CartaDoubleTextView extends LinearLayout {
         subTextView.setText(subText);
         subTextView.setTextColor(subColor);
         subTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, subTextSize);
+        subParam.setMargins(0, topMargin, 0, 0);
+        subTextView.setLayoutParams(subParam);
         array.recycle();
     }
 
@@ -70,8 +73,7 @@ public class CartaDoubleTextView extends LinearLayout {
         subTextView = new TextView(c);
         mainTextView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         subParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        subParam.setMargins(0, 5, 0, 0);
-        subTextView.setLayoutParams(subParam);
+
         subTextView.setTypeface(null, Typeface.BOLD);
         addView(mainTextView);
         addView(subTextView);

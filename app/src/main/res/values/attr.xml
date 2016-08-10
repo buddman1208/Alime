@@ -11,5 +11,6 @@
         <attr name="subColor" format="reference|color" />
         <attr name="mainTextSize" format="reference|dimension" />
         <attr name="subTextSize" format="reference|dimension" />
+        <attr name="textMargin" format="reference|dimension" />
     </declare-styleable>
 </resources>

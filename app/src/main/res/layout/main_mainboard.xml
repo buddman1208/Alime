@@ -86,18 +86,19 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/mainDashboardTime"
                 carta:mainText="AM"
-                carta:mainTextSize="7sp"
+                carta:mainTextSize="14dp"
                 carta:subText="게임 개발"
-                carta:subTextSize="7sp" />
+                carta:subTextSize="18sp"
+                carta:textMargin="0dp"/>
         </RelativeLayout>
 
         <kr.edcan.alime.views.CartaTagView
-            android:layout_width="150dp"
+            android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            carta:fullMode="true"
-            android:text="asdf"
-            carta:themeColor="#aa0000" />
+            android:layout_marginTop="20dp"
+            android:text="모의대회 시작하기"
+            carta:fullMode="false"
+            carta:themeColor="@android:color/white" />
     </LinearLayout>
 </LinearLayout>

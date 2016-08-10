@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -51,10 +52,10 @@ public class CartaDoubleTextView extends LinearLayout {
 
         mainTextView.setText(primaryText);
         mainTextView.setTextColor(primaryColor);
-        mainTextView.setTextSize(mainTextSize);
+        mainTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mainTextSize);
         subTextView.setText(subText);
         subTextView.setTextColor(subColor);
-        subTextView.setTextSize(subTextSize);
+        subTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, subTextSize);
         array.recycle();
     }
 

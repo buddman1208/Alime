@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:carta="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    android:orientation="vertical">
 
-</LinearLayout>
+    <ListView
+        android:id="@+id/mainQNAListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary">
+
+        <kr.edcan.alime.views.CartaTagView
+            android:id="@+id/mainQNAConfirm"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:text="질문하기"
+            carta:themeColor="#FFF" />
+    </RelativeLayout>
+</RelativeLayout>

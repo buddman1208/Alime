@@ -58,7 +58,7 @@
         </android.support.design.widget.CoordinatorLayout>
 
         <LinearLayout
-            android:id="@+id/mainDrawer"
+            android:id="@+id/mainDrawerLayout"
             android:layout_width="280dp"
             android:background="@color/backgroundColor"
             android:layout_gravity="start"

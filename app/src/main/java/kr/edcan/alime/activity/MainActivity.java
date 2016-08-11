@@ -12,10 +12,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import kr.edcan.alime.R;
 import kr.edcan.alime.databinding.ActivityMainBinding;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mainBind = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setDefault();
+        loadDataFromServer();
     }
 
     private void setDefault() {
@@ -54,8 +57,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void loadDataFromServer() {
+
+    }
+
     public static class MainFragment extends Fragment {
         private static final String ARG_SECTION_NUMBER = "pageNumber";
+        int layout[] = new int[]{R.layout.main_mainboard, R.layout.main_notice, R.layout.main_question, R.layout.main_prize};
+
+        ListView noticeListView, QNAListView;
+        RecyclerView prizeView;
 
         public static MainFragment newInstance(int pageNum) {
             Bundle args = new Bundle();
@@ -67,12 +78,29 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            int layout[] = new int[]{R.layout.main_mainboard, R.layout.main_notice, R.layout.main_question, R.layout.main_prize};
             final int position = getArguments().getInt(ARG_SECTION_NUMBER);
             View view = inflater.inflate(layout[position], container, false);
+            setPage(view, position);
             return view;
         }
+
+        public void setPage(View view, int position){
+            switch (position){
+                case 0:
+
+                    break;
+                case 1:
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+            }
+        }
     }
+
 
     public class MainPagerAdapter extends FragmentPagerAdapter {
 

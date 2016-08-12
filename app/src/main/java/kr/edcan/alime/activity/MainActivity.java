@@ -21,6 +21,7 @@ import android.widget.ListView;
 
 import kr.edcan.alime.R;
 import kr.edcan.alime.databinding.ActivityMainBinding;
+import kr.edcan.alime.databinding.MainQuestionBinding;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
     public static class MainFragment extends Fragment {
         private static final String ARG_SECTION_NUMBER = "pageNumber";
         int layout[] = new int[]{R.layout.main_mainboard, R.layout.main_notice, R.layout.main_question, R.layout.main_prize};
-
         ListView noticeListView, QNAListView;
         RecyclerView prizeView;
 
@@ -79,13 +79,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             final int position = getArguments().getInt(ARG_SECTION_NUMBER);
-            View view = inflater.inflate(layout[position], container, false);
+            View view = DataBindingUtil.inflate(inflater, layout[position], container, true).getRoot();
             setPage(view, position);
             return view;
         }
 
-        public void setPage(View view, int position){
-            switch (position){
+        public void setPage(View view, int position) {
+            switch (position) {
                 case 0:
 
                     break;

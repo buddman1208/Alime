@@ -21,6 +21,9 @@ import android.widget.ListView;
 
 import kr.edcan.alime.R;
 import kr.edcan.alime.databinding.ActivityMainBinding;
+import kr.edcan.alime.databinding.MainMainboardBinding;
+import kr.edcan.alime.databinding.MainNoticeBinding;
+import kr.edcan.alime.databinding.MainPrizeBinding;
 import kr.edcan.alime.databinding.MainQuestionBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             final int position = getArguments().getInt(ARG_SECTION_NUMBER);
-            View view = DataBindingUtil.inflate(inflater, layout[position], container, true).getRoot();
+            View view = DataBindingUtil.inflate(inflater, layout[position], container, false).getRoot();
             setPage(view, position);
             return view;
         }

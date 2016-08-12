@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBind = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        setDefault();
         loadDataFromServer();
     }
 
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadDataFromServer() {
-
+        setDefault();
     }
 
     public static class MainFragment extends Fragment {

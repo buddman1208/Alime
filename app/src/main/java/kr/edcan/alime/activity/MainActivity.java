@@ -79,10 +79,17 @@ public class MainActivity extends AppCompatActivity {
         setDefault();
     }
 
+    public void appendNoticeData() {
+        currentNoticePage++;
+        pageList.addAll(parser.getNoticeList(currentNoticePage).second);
+        // Adapter NotifySetChanged
+    }
+
     public static class MainFragment extends Fragment {
         private static final String ARG_SECTION_NUMBER = "pageNumber";
         int layout[] = new int[]{R.layout.main_mainboard, R.layout.main_notice, R.layout.main_question, R.layout.main_prize};
         ListView noticeListView, QNAListView;
+
         RecyclerView prizeView;
 
         public static MainFragment newInstance(int pageNum) {

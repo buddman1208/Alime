@@ -12,5 +12,9 @@
         <attr name="mainTextSize" format="reference|dimension" />
         <attr name="subTextSize" format="reference|dimension" />
         <attr name="textMargin" format="reference|dimension" />
+        <attr name="mainSingleLine" format="reference|boolean" />
+        <attr name="subSingleLine" format="reference|boolean" />
+        <attr name="mainBold" format="reference|boolean" />
+        <attr name="subBold" format="reference|boolean" />
     </declare-styleable>
 </resources>

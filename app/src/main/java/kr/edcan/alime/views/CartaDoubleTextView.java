@@ -22,6 +22,8 @@ public class CartaDoubleTextView extends LinearLayout {
     String primaryText, subText;
     float pxConvert;
     int primaryColor, subColor, topMargin;
+    boolean mainSingleLine, subSingleLine;
+    boolean mainBold, subBold;
     float mainTextSize, subTextSize;
     TextView mainTextView, subTextView;
     LayoutParams subParam;
@@ -51,6 +53,10 @@ public class CartaDoubleTextView extends LinearLayout {
         mainTextSize = array.getDimensionPixelSize(R.styleable.CartaDoubleTextView_mainTextSize, 30) / pxConvert;
         subTextSize = array.getDimensionPixelSize(R.styleable.CartaDoubleTextView_subTextSize, 40) / pxConvert;
         topMargin = array.getLayoutDimension(R.styleable.CartaDoubleTextView_textMargin, 10);
+        mainSingleLine = array.getBoolean(R.styleable.CartaDoubleTextView_mainSingleLine, true);
+        subSingleLine = array.getBoolean(R.styleable.CartaDoubleTextView_subSingleLine, false);
+        mainBold = array.getBoolean(R.styleable.CartaDoubleTextView_mainBold, false);
+        subBold = array.getBoolean(R.styleable.CartaDoubleTextView_subBold, true);
 
         mainTextView.setText(primaryText);
         mainTextView.setTextColor(primaryColor);
@@ -60,6 +66,10 @@ public class CartaDoubleTextView extends LinearLayout {
         subTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, subTextSize);
         subParam.setMargins(0, topMargin, 0, 0);
         subTextView.setLayoutParams(subParam);
+        if (mainSingleLine) mainTextView.setSingleLine();
+        if (subSingleLine) subTextView.setSingleLine();
+        if (mainBold) mainTextView.setTypeface(null, Typeface.BOLD);
+        if (subBold) subTextView.setTypeface(null, Typeface.BOLD);
         array.recycle();
     }
 
@@ -75,7 +85,6 @@ public class CartaDoubleTextView extends LinearLayout {
         mainTextView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         subParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 //
-        subTextView.setTypeface(null, Typeface.BOLD);
         addView(mainTextView);
         addView(subTextView);
     }

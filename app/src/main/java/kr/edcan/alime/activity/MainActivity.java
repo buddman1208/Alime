@@ -33,6 +33,8 @@ import kr.edcan.alime.utils.SkillPageParser;
 
 public class MainActivity extends AppCompatActivity {
 
+    int currentNoticePage = 0;
+    int maxNoticePage = 0;
     String[] titleArr = new String[]{"메인 보드", "공지사항", "질문과 답변", "시상 및 특전"};
     ActivityMainBinding mainBind;
     ViewPager mainPager;
@@ -40,17 +42,17 @@ public class MainActivity extends AppCompatActivity {
     TabLayout mainTabLayout;
     LinearLayout mainToolbar;
 
+    SkillPageParser parser;
+    ArrayList<SkillPageParser.PageList> pageList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBind = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        Log.e("asdf", "mainBinding");
         loadDataFromServer();
     }
 
     private void setDefault() {
-        Log.e("asdf", "setDefault");
-
         // Widgets
         mainPager = mainBind.mainViewPager;
         mainTabLayout = mainBind.mainTabLayout;
@@ -69,11 +71,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadDataFromServer() {
-        Log.e("asdf", "loadingData");
-        SkillPageParser parser = new SkillPageParser(MainActivity.this);
-        ArrayList<SkillPageParser.PageList> arrayList = parser.getNoticeList(0);
+        parser = new SkillPageParser(MainActivity.this);
+        pageList = parser.getNoticeList(currentNoticePage);
         setDefault();
-//        dialog.dismiss();
     }
 
     public static class MainFragment extends Fragment {

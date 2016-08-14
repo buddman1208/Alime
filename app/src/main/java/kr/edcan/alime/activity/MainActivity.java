@@ -1,5 +1,6 @@
 package kr.edcan.alime.activity;
 
+import android.app.ProgressDialog;
 import android.databinding.DataBindingUtil;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -43,12 +44,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBind = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        Log.e("asdf", "mainBinding");
         loadDataFromServer();
-        SkillPageParser parser = new SkillPageParser();
-        ArrayList<SkillPageParser.PageList> arrayList = parser.getNoticeList(0);
     }
 
     private void setDefault() {
+        Log.e("asdf", "setDefault");
+
         // Widgets
         mainPager = mainBind.mainViewPager;
         mainTabLayout = mainBind.mainTabLayout;
@@ -67,7 +69,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadDataFromServer() {
+        Log.e("asdf", "loadingData");
+        SkillPageParser parser = new SkillPageParser(MainActivity.this);
+        ArrayList<SkillPageParser.PageList> arrayList = parser.getNoticeList(0);
         setDefault();
+//        dialog.dismiss();
     }
 
     public static class MainFragment extends Fragment {

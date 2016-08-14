@@ -1,6 +1,9 @@
 package kr.edcan.alime.utils;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v4.util.Pair;
 import android.util.Log;
 
@@ -24,8 +27,11 @@ public class SkillPageParser {
     final static public String defaultUrl = "http://skill.hrdkorea.or.kr/information/in001.action?&&page=";
     private Document skillNotice;
     private DocumentGetter getter;
+    private Context context;
 
-    public SkillPageParser() {
+    public SkillPageParser(Context c) {
+        this.context = c;
+
         getter = new DocumentGetter();
     }
 
@@ -76,6 +82,16 @@ public class SkillPageParser {
     }
 
     class DocumentGetter extends AsyncTask<String, Void, Document> {
+        ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+            dialog = new ProgressDialog(context);
+            dialog.setTitle("공지사항을 가져오고 있습니다.");
+            dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            dialog.show();
+            super.onPreExecute();
+        }
 
         @Override
         protected Document doInBackground(String... params) {
@@ -90,6 +106,17 @@ public class SkillPageParser {
                 e.printStackTrace();
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Document document) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dialog.dismiss();
+                }
+            }, 500);
+            super.onPostExecute(document);
         }
     }
 }

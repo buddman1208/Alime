@@ -71,7 +71,10 @@ public class CartaDoubleTextView extends LinearLayout {
             mainTextView.setSingleLine();
             mainTextView.setEllipsize(TextUtils.TruncateAt.END);
         }
-        if (subSingleLine) subTextView.setSingleLine();
+        if (subSingleLine) {
+            subTextView.setSingleLine();
+            subTextView.setEllipsize(TextUtils.TruncateAt.END);
+        }
         if (mainBold) mainTextView.setTypeface(null, Typeface.BOLD);
         if (subBold) subTextView.setTypeface(null, Typeface.BOLD);
         array.recycle();

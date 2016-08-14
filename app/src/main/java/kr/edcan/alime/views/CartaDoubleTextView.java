@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.LinearLayout;
@@ -66,7 +67,10 @@ public class CartaDoubleTextView extends LinearLayout {
         subTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, subTextSize);
         subParam.setMargins(0, topMargin, 0, 0);
         subTextView.setLayoutParams(subParam);
-        if (mainSingleLine) mainTextView.setSingleLine();
+        if (mainSingleLine) {
+            mainTextView.setSingleLine();
+            mainTextView.setEllipsize(TextUtils.TruncateAt.END);
+        }
         if (subSingleLine) subTextView.setSingleLine();
         if (mainBold) mainTextView.setTypeface(null, Typeface.BOLD);
         if (subBold) subTextView.setTypeface(null, Typeface.BOLD);

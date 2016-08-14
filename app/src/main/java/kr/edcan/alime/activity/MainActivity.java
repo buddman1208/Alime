@@ -15,6 +15,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.util.SortedListAdapterCallback;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import kr.edcan.alime.databinding.MainMainboardBinding;
 import kr.edcan.alime.databinding.MainNoticeBinding;
 import kr.edcan.alime.databinding.MainPrizeBinding;
 import kr.edcan.alime.databinding.MainQuestionBinding;
+import kr.edcan.alime.models.PageList;
 import kr.edcan.alime.utils.SkillPageParser;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout mainToolbar;
 
     SkillPageParser parser;
-    ArrayList<SkillPageParser.PageList> pageList;
+    ArrayList<PageList> pageList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadDataFromServer() {
         parser = new SkillPageParser(MainActivity.this);
-        Pair<Integer, ArrayList<SkillPageParser.PageList>> pair = parser.getNoticeList(currentNoticePage);
+        Pair<Integer, ArrayList<PageList>> pair = parser.getNoticeList(currentNoticePage);
         maxNoticePage = pair.first;
         pageList = pair.second;
         setDefault();

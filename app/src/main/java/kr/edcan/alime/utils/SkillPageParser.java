@@ -10,14 +10,13 @@ import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.atomic.AtomicReference;
+
+import kr.edcan.alime.models.PageList;
 
 /**
  * Created by JunseokOh on 2016. 8. 12..
@@ -66,27 +65,7 @@ public class SkillPageParser {
         return Pair.create(maxSize, resultArr);
     }
 
-    public class PageList {
-        private String title, href, date;
 
-        public PageList(String title, String href, String date) {
-            this.title = title;
-            this.href = href;
-            this.date = date;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public String getHref() {
-            return href;
-        }
-
-        public String getDate() {
-            return date;
-        }
-    }
 
     class DocumentGetter extends AsyncTask<String, Void, Document> {
         ProgressDialog dialog;

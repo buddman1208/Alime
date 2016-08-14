@@ -60,11 +60,10 @@ public class SkillPageParser {
         Elements titles = noticeDoc.select("td.title>p>nobr>a");
         Elements date = noticeDoc.select("tr>td");
         for (int i = 0; i < titles.size(); i++) {
-            resultArr.add(new PageList(titles.get(i).text(), date.get(i * 4).text(), titles.get(i).absUrl("href")));
+            resultArr.add(new PageList(titles.get(i).text(), titles.get(i).absUrl("href"), date.get(i * 4).text()));
         }
         return Pair.create(maxSize, resultArr);
     }
-
 
 
     class DocumentGetter extends AsyncTask<String, Void, Document> {

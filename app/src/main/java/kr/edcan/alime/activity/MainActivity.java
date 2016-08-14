@@ -13,11 +13,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import kr.edcan.alime.R;
 import kr.edcan.alime.databinding.ActivityMainBinding;
@@ -25,6 +28,7 @@ import kr.edcan.alime.databinding.MainMainboardBinding;
 import kr.edcan.alime.databinding.MainNoticeBinding;
 import kr.edcan.alime.databinding.MainPrizeBinding;
 import kr.edcan.alime.databinding.MainQuestionBinding;
+import kr.edcan.alime.utils.SkillPageParser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mainBind = DataBindingUtil.setContentView(this, R.layout.activity_main);
         loadDataFromServer();
+        SkillPageParser parser = new SkillPageParser();
+        ArrayList<SkillPageParser.PageList> arrayList = parser.getNoticeList(0);
     }
 
     private void setDefault() {

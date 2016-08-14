@@ -1,6 +1,7 @@
 package kr.edcan.alime.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import kr.edcan.alime.R;
+import kr.edcan.alime.adapters.NoticeListAdapter;
 import kr.edcan.alime.databinding.ActivityMainBinding;
 import kr.edcan.alime.databinding.MainMainboardBinding;
 import kr.edcan.alime.databinding.MainNoticeBinding;
@@ -36,8 +38,8 @@ import kr.edcan.alime.utils.SkillPageParser;
 
 public class MainActivity extends AppCompatActivity {
 
-    int currentNoticePage = 0;
-    int maxNoticePage = 0;
+    static int currentNoticePage = 0;
+    static int maxNoticePage = 0;
     String[] titleArr = new String[]{"메인 보드", "공지사항", "질문과 답변", "시상 및 특전"};
     ActivityMainBinding mainBind;
     ViewPager mainPager;
@@ -45,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
     TabLayout mainTabLayout;
     LinearLayout mainToolbar;
 
-    SkillPageParser parser;
-    ArrayList<PageList> pageList;
+    static SkillPageParser parser;
+    static ArrayList<PageList> pageList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +90,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static class MainFragment extends Fragment {
-        private static final String ARG_SECTION_NUMBER = "pageNumber";
         int layout[] = new int[]{R.layout.main_mainboard, R.layout.main_notice, R.layout.main_question, R.layout.main_prize};
+        static final String ARG_SECTION_NUMBER = "pageNumber";
+        static NoticeListAdapter noticeAdapter;
+        LayoutInflater inflater;
         ListView noticeListView, QNAListView;
-
+        Context context;
         RecyclerView prizeView;
 
         public static MainFragment newInstance(int pageNum) {
@@ -105,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             final int position = getArguments().getInt(ARG_SECTION_NUMBER);
+            this.inflater = inflater;
+            this.context = container.getContext();
             View view = DataBindingUtil.inflate(inflater, layout[position], container, false).getRoot();
             setPage(view, position);
             return view;
@@ -116,6 +122,9 @@ public class MainActivity extends AppCompatActivity {
 
                     break;
                 case 1:
+                    noticeListView = (ListView) view.findViewById(R.id.mainNoticeListView);
+                    noticeAdapter = new NoticeListAdapter(context, pageList);
+                    noticeListView.setAdapter(noticeAdapter);
                     break;
                 case 2:
 

@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.util.Pair;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -13,6 +14,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
@@ -35,10 +37,10 @@ public class SkillPageParser {
         getter = new DocumentGetter();
     }
 
-    public ArrayList<PageList> getNoticeList(int currentPage) {
+    public Pair<Integer, ArrayList<PageList>> getNoticeList(int currentPage) {
         ArrayList<PageList> resultArr = new ArrayList<>();
         Document noticeDoc;
-
+        int maxSize;
         try {
             noticeDoc = getter.execute(defaultUrl + currentPage).get();
         } catch (InterruptedException e) {
@@ -50,13 +52,18 @@ public class SkillPageParser {
             e.printStackTrace();
             return null;
         }
+        try {
+            maxSize = Integer.parseInt(noticeDoc.select("p>b").first().text());
+        } catch (Exception e) {
+            Toast.makeText(context, "공지사항을 받아오는 중에 문제가 발생했습니다.", Toast.LENGTH_SHORT).show();
+            return null;
+        }
         Elements titles = noticeDoc.select("td.title>p>nobr>a");
         Elements date = noticeDoc.select("tr>td");
         for (int i = 0; i < titles.size(); i++) {
             resultArr.add(new PageList(titles.get(i).text(), date.get(i * 4).text(), titles.get(i).absUrl("href")));
-            Log.e("asdf", titles.get(i).absUrl("href"));
         }
-        return resultArr;
+        return Pair.create(maxSize, resultArr);
     }
 
     public class PageList {

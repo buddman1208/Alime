@@ -27,32 +27,30 @@ public class SkillPageParser {
     final private int TIMEOUT = 5000;
     final static public String defaultUrl = "http://skill.hrdkorea.or.kr/information/in001.action?&&page=";
     private Document skillNotice;
-    private DocumentGetter getter;
     private Context context;
+    private int currentPage = 0;
 
     public SkillPageParser(Context c) {
         this.context = c;
-
-        getter = new DocumentGetter();
     }
 
     public Pair<Integer, ArrayList<PageList>> getNoticeList(int currentPage) {
+        this.currentPage = currentPage;
         ArrayList<PageList> resultArr = new ArrayList<>();
         Document noticeDoc;
         int maxSize;
         try {
-            noticeDoc = getter.execute(defaultUrl + currentPage).get();
+            noticeDoc = new DocumentGetter().execute(defaultUrl + currentPage).get();
         } catch (InterruptedException e) {
-            Log.e("asdf", e.getMessage());
             e.printStackTrace();
             return null;
         } catch (ExecutionException e) {
-            Log.e("asdf", e.getMessage());
             e.printStackTrace();
             return null;
         }
         try {
-            maxSize = Integer.parseInt(noticeDoc.select("p>b").first().text());
+            int maxItem = Integer.parseInt(noticeDoc.select("p>b").first().text());
+            maxSize = (maxItem / 10) + ((maxItem % 10 == 0) ? 0 : 1);
         } catch (Exception e) {
             Toast.makeText(context, "공지사항을 받아오는 중에 문제가 발생했습니다.", Toast.LENGTH_SHORT).show();
             return null;
@@ -71,11 +69,13 @@ public class SkillPageParser {
 
         @Override
         protected void onPreExecute() {
-            dialog = new ProgressDialog(context);
-            dialog.setTitle("공지사항을 가져오고 있습니다.");
-            dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            dialog.show();
-            super.onPreExecute();
+            if (currentPage == 0) {
+                dialog = new ProgressDialog(context);
+                dialog.setTitle("공지사항을 가져오고 있습니다.");
+                dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                dialog.show();
+                super.onPreExecute();
+            }
         }
 
         @Override
@@ -95,12 +95,10 @@ public class SkillPageParser {
 
         @Override
         protected void onPostExecute(Document document) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    dialog.dismiss();
-                }
-            }, 500);
+            if (currentPage == 0) {
+                dialog.dismiss();
+                super.onPreExecute();
+            }
             super.onPostExecute(document);
         }
     }

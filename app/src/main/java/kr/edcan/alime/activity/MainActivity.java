@@ -15,11 +15,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
+import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 
 import java.util.ArrayList;
 
@@ -31,8 +35,8 @@ import kr.edcan.alime.utils.SkillPageParser;
 
 public class MainActivity extends AppCompatActivity {
 
-    static int currentNoticePage = 0;
-    static int maxNoticePage = 0;
+    static int currentNoticePage = 1;
+    static int maxNoticePage = 1;
     String[] titleArr = new String[]{"메인 보드", "공지사항", "질문과 답변", "시상 및 특전"};
     ActivityMainBinding mainBind;
     ViewPager mainPager;
@@ -76,11 +80,6 @@ public class MainActivity extends AppCompatActivity {
         setDefault();
     }
 
-    public void appendNoticeData() {
-        currentNoticePage++;
-        pageList.addAll(parser.getNoticeList(currentNoticePage).second);
-        // Adapter NotifySetChanged
-    }
 
     public static class MainFragment extends Fragment {
         int layout[] = new int[]{R.layout.main_mainboard, R.layout.main_notice, R.layout.main_question, R.layout.main_prize};
@@ -88,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         static NoticeListAdapter noticeAdapter;
         LayoutInflater inflater;
         ListView noticeListView, QNAListView;
+        SwipyRefreshLayout swLayout;
         Context context;
         RecyclerView prizeView;
 
@@ -112,12 +112,18 @@ public class MainActivity extends AppCompatActivity {
         public void setPage(View view, int position) {
             switch (position) {
                 case 0:
-
                     break;
                 case 1:
                     noticeListView = (ListView) view.findViewById(R.id.mainNoticeListView);
                     noticeAdapter = new NoticeListAdapter(context, pageList);
                     noticeListView.setAdapter(noticeAdapter);
+                    swLayout = (SwipyRefreshLayout) view.findViewById(R.id.mainNoticeSRLayout);
+                    swLayout.setOnRefreshListener(new SwipyRefreshLayout.OnRefreshListener() {
+                        @Override
+                        public void onRefresh(SwipyRefreshLayoutDirection direction) {
+                            appendNoticeData();
+                        }
+                    });
                     break;
                 case 2:
 
@@ -125,6 +131,15 @@ public class MainActivity extends AppCompatActivity {
                 case 3:
 
                     break;
+            }
+        }
+
+        public void appendNoticeData() {
+            if (currentNoticePage + 1 <= maxNoticePage) {
+                currentNoticePage++;
+                pageList.addAll(parser.getNoticeList(currentNoticePage).second);
+                noticeAdapter.notifyDataSetChanged();
+                swLayout.setRefreshing(false);
             }
         }
     }

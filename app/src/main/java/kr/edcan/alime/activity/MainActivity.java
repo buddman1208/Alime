@@ -22,12 +22,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-
-import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
-import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
-
 import java.util.ArrayList;
-
 import kr.edcan.alime.R;
 import kr.edcan.alime.adapters.NoticeListAdapter;
 import kr.edcan.alime.databinding.ActivityMainBinding;

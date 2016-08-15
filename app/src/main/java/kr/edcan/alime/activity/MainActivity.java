@@ -1,6 +1,5 @@
 package kr.edcan.alime.activity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.PorterDuff;
@@ -16,8 +15,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.util.SortedListAdapterCallback;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,10 +26,6 @@ import java.util.ArrayList;
 import kr.edcan.alime.R;
 import kr.edcan.alime.adapters.NoticeListAdapter;
 import kr.edcan.alime.databinding.ActivityMainBinding;
-import kr.edcan.alime.databinding.MainMainboardBinding;
-import kr.edcan.alime.databinding.MainNoticeBinding;
-import kr.edcan.alime.databinding.MainPrizeBinding;
-import kr.edcan.alime.databinding.MainQuestionBinding;
 import kr.edcan.alime.models.PageList;
 import kr.edcan.alime.utils.SkillPageParser;
 

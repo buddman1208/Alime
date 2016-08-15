@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -83,11 +84,11 @@ public class MainActivity extends AppCompatActivity {
 
     public static class MainFragment extends Fragment {
         int layout[] = new int[]{R.layout.main_mainboard, R.layout.main_notice, R.layout.main_question, R.layout.main_prize};
+        boolean mLockListView = false;
         static final String ARG_SECTION_NUMBER = "pageNumber";
         static NoticeListAdapter noticeAdapter;
         LayoutInflater inflater;
         ListView noticeListView, QNAListView;
-        SwipyRefreshLayout swLayout;
         Context context;
         RecyclerView prizeView;
 
@@ -117,12 +118,21 @@ public class MainActivity extends AppCompatActivity {
                     noticeListView = (ListView) view.findViewById(R.id.mainNoticeListView);
                     noticeAdapter = new NoticeListAdapter(context, pageList);
                     noticeListView.setAdapter(noticeAdapter);
-                    swLayout = (SwipyRefreshLayout) view.findViewById(R.id.mainNoticeSRLayout);
-                    swLayout.setOnRefreshListener(new SwipyRefreshLayout.OnRefreshListener() {
+                    noticeListView.setOnScrollListener(new AbsListView.OnScrollListener() {
                         @Override
-                        public void onRefresh(SwipyRefreshLayoutDirection direction) {
-                            appendNoticeData();
+                        public void onScrollStateChanged(AbsListView absListView, int i) {
+
                         }
+
+                        @Override
+                        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                            int count = totalItemCount - visibleItemCount;
+                            if (firstVisibleItem >= count && totalItemCount != 0 && !mLockListView) {
+                                noticeListView.smoothScrollToPosition(pageList.size());
+                                appendNoticeData();
+                            }
+                        }
+
                     });
                     break;
                 case 2:
@@ -135,12 +145,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void appendNoticeData() {
+            mLockListView = true;
             if (currentNoticePage + 1 <= maxNoticePage) {
                 currentNoticePage++;
                 pageList.addAll(parser.getNoticeList(currentNoticePage).second);
                 noticeAdapter.notifyDataSetChanged();
-                swLayout.setRefreshing(false);
             }
+            mLockListView = false;
         }
     }
 

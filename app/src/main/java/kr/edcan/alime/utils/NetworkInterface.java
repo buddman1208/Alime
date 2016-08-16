@@ -1,7 +1,10 @@
 package kr.edcan.alime.utils;
 
 import java.util.Date;
+import java.util.List;
 
+import kr.edcan.alime.models.Question;
+import kr.edcan.alime.models.User;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;

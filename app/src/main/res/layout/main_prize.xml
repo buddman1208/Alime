@@ -15,7 +15,7 @@
             carta:mainColor="@color/colorPrimary"
             carta:mainText="선수 시상"
             carta:mainTextSize="18dp"
-            carta:subColor="@android:color/white"
+            carta:subColor="@color/notSelectedTextColor"
             carta:subText="입상"
             carta:subTextSize="16dp"
             carta:textMargin="10dp" />

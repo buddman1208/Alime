@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             carta:mainBold="true"
-            carta:mainColor="@android:color/white"
+            carta:mainColor="@color/notSelectedTextColor"
             carta:mainText="경기에 대해서 질문 하나 dddd드립니다"
             carta:mainTextSize="14dp"
             carta:subBold="false"

@@ -1,6 +1,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +32,7 @@
                 android:padding="16dp">
 
                 <EditText
-                    android:id="@+id/loginId"
+                    android:id="@+id/registerId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="아이디"
@@ -39,31 +40,47 @@
                     android:textSize="14dp" />
 
                 <EditText
-                    android:id="@+id/loginPassword"
+                    android:id="@+id/registerPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="비밀번호"
                     android:inputType="textPassword"
                     android:singleLine="true"
                     android:textSize="14dp" />
+
+                <EditText
+                    android:id="@+id/registerRePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="비밀번호 재입력"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:textSize="14dp" />
+
+                <EditText
+                    android:id="@+id/registerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="이름 입력"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:textSize="14dp" />
+
+                <Spinner
+                    android:id="@+id/registerSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
             </LinearLayout>
 
             <kr.edcan.alime.views.CartaTagView
-                android:id="@+id/loginLogin"
+                android:id="@+id/registerRegister"
                 android:layout_width="260dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="15dp"
-                android:text="로그인"
+                android:text="회원가입"
                 app:themeColor="#FFF" />
 
-            <TextView
-                android:id="@+id/loginRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:text="회원가입"
-                android:textColor="#FFF" />
         </LinearLayout>
     </RelativeLayout>
 </layout>

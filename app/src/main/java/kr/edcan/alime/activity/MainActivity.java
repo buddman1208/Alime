@@ -19,6 +19,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -66,13 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
         mainPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
         mainTabLayout.setupWithViewPager(mainPager);
-        mainBind.mainDrawerToggle.setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
-        mainBind.mainDrawerToggle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mainDrawer.openDrawer(GravityCompat.START);
-            }
-        });
     }
 
     private void loadDataFromServer() {
@@ -131,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             startActivity(new Intent(getContext(), NoticeViewActivity.class)
-                            .putExtra("url", pageList.get(i).getHref()));
+                                    .putExtra("url", pageList.get(i).getHref()));
                         }
                     });
                     noticeListView.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -196,5 +191,22 @@ public class MainActivity extends AppCompatActivity {
                 return titleArr[position];
             return null;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.myPage:
+                startActivity(new Intent(getApplicationContext(), MyPageActivity.class));
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

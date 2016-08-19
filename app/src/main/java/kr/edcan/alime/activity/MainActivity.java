@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     ViewPager mainPager;
     DrawerLayout mainDrawer;
     TabLayout mainTabLayout;
-    LinearLayout mainToolbar;
 
     static SkillPageParser parser;
     static ArrayList<PageList> pageList;
@@ -63,9 +62,8 @@ public class MainActivity extends AppCompatActivity {
         // Widgets
         mainPager = mainBind.mainViewPager;
         mainTabLayout = mainBind.mainTabLayout;
-        mainToolbar = mainBind.mainToolbar;
         mainDrawer = mainBind.mainDrawer;
-
+        setSupportActionBar(mainBind.toolbar);
         mainPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
         mainTabLayout.setupWithViewPager(mainPager);
     }

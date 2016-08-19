@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="kr.edcan.alime.activity.NoticeViewActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:title="질문 보기"
+        android:titleTextColor="@color/colorPrimary" />
+
+    <kr.edcan.alime.views.CartaDoubleTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="18dp"
+        app:mainBold="true"
+        app:mainSingleLine="false"
+        app:mainText="기능대회의 경기 종목에 대해서 질문 하나 드리고자 합니다."
+        app:mainTextSize="25dp"
+        app:subBold="false"
+        app:subColor="#9E9E9E"
+        app:subText="2018.07.27"
+        app:textMargin="10dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/appbar_background"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <TextView
+        android:layout_width=""
+        android:id="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:layout_margin="18dp"
+        android:text="기능경기 종목 중 게임은 어떠한 과제를 수행해야 하며, 그러기 위해선 어떠한 준비 절차가 필요한지 알고 싶습니다."
+        android:textColor="@color/commonColor"
+        android:textSize="15dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="#228a8a8a" />
+
+    <kr.edcan.alime.views.CartaDoubleTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="18dp"
+        app:mainBold="true"
+        app:mainColor="@color/colorPrimary"
+        app:mainText="관리자의 답변"
+        app:mainTextSize="18dp"
+        app:subBold="false"
+        app:subColor="@color/commonColor"
+        app:subText="안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 "
+        app:subTextSize="15dp"
+        app:textMargin="10dp"></kr.edcan.alime.views.CartaDoubleTextView>
+</LinearLayout>

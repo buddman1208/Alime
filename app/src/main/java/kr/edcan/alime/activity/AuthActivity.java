@@ -3,6 +3,8 @@ package kr.edcan.alime.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import kr.edcan.alime.R;
+
 public class AuthActivity extends AppCompatActivity {
 
     @Override

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -61,6 +62,26 @@ public class SkillPageParser {
             resultArr.add(new PageList(titles.get(i).text(), titles.get(i).absUrl("href"), date.get(i * 4).text()));
         }
         return Pair.create(maxSize, resultArr);
+    }
+
+
+    public ArrayList<String> getNoticeContent(String url) {
+        ArrayList<String> noticeContent = new ArrayList<>();
+        Document noticeDoc;
+        try {
+            noticeDoc= new DocumentGetter().execute(url).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            return null;
+        }
+        Elements contents = noticeDoc.select("tr>td");
+        for (Element e : contents) {
+            noticeContent.add(e.text());
+        }
+        return noticeContent;
     }
 
 

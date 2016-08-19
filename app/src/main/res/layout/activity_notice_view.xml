@@ -11,7 +11,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="질문 보기"
+            app:title="글 보기"
             app:titleTextColor="@color/colorPrimary" />
 
         <kr.edcan.alime.views.CartaDoubleTextView
@@ -53,6 +53,7 @@
         <kr.edcan.alime.views.CartaDoubleTextView
             android:id="@+id/questionReply"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_margin="18dp"
             app:mainBold="true"

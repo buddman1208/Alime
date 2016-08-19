@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(getApplicationContext(), NoticeViewActivity.class));
         mainBind = DataBindingUtil.setContentView(this, R.layout.activity_main);
         loadDataFromServer();
     }
@@ -116,6 +116,13 @@ public class MainActivity extends AppCompatActivity {
                     noticeListView = (ListView) view.findViewById(R.id.mainNoticeListView);
                     noticeAdapter = new NoticeListAdapter(context, pageList);
                     noticeListView.setAdapter(noticeAdapter);
+                    noticeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            startActivity(new Intent(getContext(), NoticeViewActivity.class)
+                            .putExtra("url", pageList.get(i).getHref()));
+                        }
+                    });
                     noticeListView.setOnScrollListener(new AbsListView.OnScrollListener() {
                         @Override
                         public void onScrollStateChanged(AbsListView absListView, int i) {

@@ -27,6 +27,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -36,6 +37,7 @@ import kr.edcan.alime.adapters.PrizeRecyclerView;
 import kr.edcan.alime.databinding.ActivityMainBinding;
 import kr.edcan.alime.models.PageList;
 import kr.edcan.alime.models.PrizeData;
+import kr.edcan.alime.utils.DataManager;
 import kr.edcan.alime.utils.SkillPageParser;
 
 public class MainActivity extends AppCompatActivity {
@@ -55,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBind = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        loadDataFromServer();
     }
 
     private void setDefault() {
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         Context context;
         RecyclerView prizeView;
         ArrayList<PrizeData> prizeArr = new ArrayList<>();
+        DataManager manager;
 
         public static MainFragment newInstance(int pageNum) {
             Bundle args = new Bundle();
@@ -108,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
             this.inflater = inflater;
             this.context = container.getContext();
             View view = DataBindingUtil.inflate(inflater, layout[position], container, false).getRoot();
+            manager = new DataManager();
+            manager.initializeManager(getContext());
             setPage(view, position);
             return view;
         }
@@ -145,7 +149,8 @@ public class MainActivity extends AppCompatActivity {
                     });
                     break;
                 case 2:
-
+                    TextView loginRequest = (TextView) view.findViewById(R.id.questionLoginRequest);
+                    loginRequest.setVisibility((manager.getActiveUser().first) ? View.GONE : View.VISIBLE);
                     break;
                 case 3:
                     prizeView = (RecyclerView) view.findViewById(R.id.mainPrizeRecyclerView);
@@ -206,5 +211,11 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        loadDataFromServer();
+        super.onResume();
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:carta="http://schemas.android.com/apk/res-auto">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,5 +28,15 @@
                 android:text="질문하기"
                 carta:themeColor="#FFF" />
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/questionLoginRequest"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFF"
+            android:gravity="center"
+            android:text="로그인 후 사용해주세요."
+            android:textSize="20dp"
+            android:visibility="gone" />
     </RelativeLayout>
 </layout>

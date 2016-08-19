@@ -34,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void setDefault() {
         ArrayAdapter adapter = new ArrayAdapter(
-                getApplicationContext(), android.R.layout.simple_spinner_item,
+                getApplicationContext(), R.layout.spinner_item,
                 AlimeUtils.getType());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.registerSpinner.setAdapter(adapter);

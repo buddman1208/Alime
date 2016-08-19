@@ -63,4 +63,10 @@ public class MyPageActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        setDefault();
+        super.onResume();
+    }
 }

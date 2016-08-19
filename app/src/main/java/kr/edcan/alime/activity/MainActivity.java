@@ -15,7 +15,9 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +30,10 @@ import java.util.ArrayList;
 
 import kr.edcan.alime.R;
 import kr.edcan.alime.adapters.NoticeListAdapter;
+import kr.edcan.alime.adapters.PrizeRecyclerView;
 import kr.edcan.alime.databinding.ActivityMainBinding;
 import kr.edcan.alime.models.PageList;
+import kr.edcan.alime.models.PrizeData;
 import kr.edcan.alime.utils.SkillPageParser;
 
 public class MainActivity extends AppCompatActivity {
@@ -89,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         ListView noticeListView, QNAListView;
         Context context;
         RecyclerView prizeView;
+        ArrayList<PrizeData> prizeArr = new ArrayList<>();
 
         public static MainFragment newInstance(int pageNum) {
             Bundle args = new Bundle();
@@ -100,6 +105,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            prizeArr.add(new PrizeData("1위", "금메달", "1200", "노동부장관상"));
+            prizeArr.add(new PrizeData("2위", "은메달", "800", "대회장상"));
+            prizeArr.add(new PrizeData("3위", "동메달", "400", "대회장상"));
+            prizeArr.add(new PrizeData("우수상", "", "100", "대회장상 - 우수상 대상자 중 최상위"));
+            prizeArr.add(new PrizeData("우수상", "", "70", "대회장상 - 우수상 대상자 중 차상위"));
+            prizeArr.add(new PrizeData("우수상", "", "50", "대회장상 - 우수상 대상자 중 최하위"));
             final int position = getArguments().getInt(ARG_SECTION_NUMBER);
             this.inflater = inflater;
             this.context = container.getContext();
@@ -144,7 +155,9 @@ public class MainActivity extends AppCompatActivity {
 
                     break;
                 case 3:
-
+                    prizeView = (RecyclerView) view.findViewById(R.id.mainPrizeRecyclerView);
+                    prizeView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    prizeView.setAdapter(new PrizeRecyclerView(getContext(), prizeArr));
                     break;
             }
         }

@@ -1,95 +1,92 @@
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <RelativeLayout
-        android:id="@+id/prizeBG"
-        android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/prizeBG"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/prize_bg_first"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@drawable/prize_bg_first"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="7dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/prizeContentNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:textColor="#FFF"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/prizeContentNumberText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="위"
-                    android:textColor="#FFF"
-                    android:textSize="15sp" />
-
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="5dp"
-                    android:background="#55000000" />
-
-                <TextView
-                    android:id="@+id/prizeContentPrizeName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:text="금메달"
-                    android:textColor="#FFF"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="5dp"
-                    android:background="#55000000" />
-
-                <TextView
-                    android:id="@+id/prizeContentMoneyCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:text="1200"
-                    android:textColor="#FFF"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/prizeContentMoneyValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="만원"
-                    android:textColor="#FFF"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
+            android:layout_marginBottom="7dp"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/prizeContentSubName"
+                android:id="@+id/prizeContentNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="노동부장관상"
-                android:textColor="@color/notSelectedTextColor" />
+                android:text="1"
+                android:textColor="#FFF"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/prizeContentNumberText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFF"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:background="#55000000" />
+
+            <TextView
+                android:id="@+id/prizeContentPrizeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="금메달"
+                android:textColor="#FFF"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/prizeDivider"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:background="#55000000" />
+
+            <TextView
+                android:id="@+id/prizeContentMoneyCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="1200"
+                android:textColor="#FFF"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/prizeContentMoneyValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="만원"
+                android:textColor="#FFF"
+                android:textSize="15sp" />
+
         </LinearLayout>
-    </RelativeLayout>
-</layout>
+
+        <TextView
+            android:id="@+id/prizeContentSubName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="노동부장관상"
+            android:textColor="@color/notSelectedTextColor" />
+    </LinearLayout>
+</RelativeLayout>

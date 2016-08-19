@@ -3,6 +3,7 @@ package kr.edcan.alime.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.support.annotation.NonNull;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.ArrayList;
 
@@ -42,18 +46,19 @@ public class MyPageActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.myPageListView);
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         arrayAdapter.add(activeUser.first ? "로그아웃" : "로그인");
-        arrayAdapter.add("회원탈퇴");
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
-                        startActivity(new Intent(getApplicationContext(), AuthActivity.class));
+                        if (activeUser.first) {
+                            manager.removeAllData();
+                            recreate();
+                        } else {
+                            startActivity(new Intent(getApplicationContext(), AuthActivity.class));
+                        }
                         break;
-                    case 1:
-                        break;
-
                 }
             }
         });

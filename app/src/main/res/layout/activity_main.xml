@@ -1,52 +1,39 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/mainDrawer"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor">
 
-        <android.support.design.widget.CoordinatorLayout
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/backgroundColor">
 
-            <android.support.design.widget.AppBarLayout
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:titleTextColor="@color/colorPrimary" />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/mainTabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/backgroundColor">
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:tabIndicatorColor="@color/colorPrimary"
+                app:tabSelectedTextColor="@color/colorPrimary"
+                app:tabTextColor="@color/notSelectedTextColor" />
+        </android.support.design.widget.AppBarLayout>
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    app:titleTextColor="@color/colorPrimary"
-                    android:layout_height="?attr/actionBarSize" />
-
-                <android.support.design.widget.TabLayout
-                    android:id="@+id/mainTabLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    app:tabIndicatorColor="@color/colorPrimary"
-                    app:tabSelectedTextColor="@color/colorPrimary"
-                    app:tabTextColor="@color/notSelectedTextColor" />
-            </android.support.design.widget.AppBarLayout>
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/mainViewPager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-        </android.support.design.widget.CoordinatorLayout>
-
-        <LinearLayout
-            android:id="@+id/mainDrawerLayout"
-            android:layout_width="280dp"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/mainViewPager"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@color/backgroundColor"
-            android:orientation="vertical"></LinearLayout>
-    </android.support.v4.widget.DrawerLayout>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
 </layout>

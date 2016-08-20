@@ -24,7 +24,10 @@
             android:name=".activity.RegisterActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".activity.NoticeViewActivity" />
-        <activity android:name=".activity.MyPageActivity"></activity>
+        <activity android:name=".activity.MyPageActivity" />
+        <activity android:name=".activity.QuestionViewActivity" />
+        <activity android:name=".activity.SoochickActivity" />
+        <activity android:name=".activity.NewQuestion"></activity>
     </application>
 
 </manifest>

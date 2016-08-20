@@ -31,7 +31,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         Question data = arrayList.get(position);
         MainCommonListviewContentBinding listBind = DataBindingUtil.inflate(inflater, R.layout.main_common_listview_content, parent, false);
         listBind.commonDoubleText.setPrimaryText(data.getTitle());
-        listBind.commonDoubleText.setSubText(data.getDate().toLocaleString() + " - "+data.getAuthor());
+        listBind.commonDoubleText.setSubText(data.getDate().toLocaleString());
         return listBind.getRoot();
     }
 }

@@ -1,195 +1,239 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:carta="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backgroundColor"
-        android:orientation="vertical"
-        android:padding="@dimen/common_padding">
+        android:layout_height="match_parent">
 
-        <HorizontalScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:background="@color/backgroundColor"
+            android:orientation="vertical"
+            android:padding="@dimen/common_padding">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <kr.edcan.alime.views.CartaDoubleTextView
+                        android:id="@+id/mainDashboardCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        carta:mainText="참가 분야"
+                        carta:mainTextSize="15sp"
+                        carta:subColor="@color/colorPrimary"
+                        carta:subText="정보 없음"
+                        carta:subTextSize="22sp" />
+
+                    <kr.edcan.alime.views.CartaDoubleTextView
+                        android:id="@+id/mainDashboardUsername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_padding"
+                        carta:mainText="참가자명"
+                        carta:mainTextSize="15sp"
+                        carta:subColor="@color/colorPrimary"
+                        carta:subText="정보 없음"
+                        carta:subTextSize="22sp" />
+
+                    <kr.edcan.alime.views.CartaDoubleTextView
+                        android:id="@+id/mainDashboardCompDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/common_padding"
+                        carta:mainText="대회일"
+                        carta:mainTextSize="15sp"
+                        carta:subColor="@color/colorPrimary"
+                        carta:subText="2016.09.05"
+                        carta:subTextSize="22sp" />
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="@dimen/common_padding"
+                android:background="@drawable/round_square_10dp"
+                android:orientation="vertical"
+                android:padding="30dp">
 
                 <kr.edcan.alime.views.CartaDoubleTextView
-                    android:id="@+id/mainDashboardCategory"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    carta:mainText="참가 분야"
+                    android:layout_marginBottom="20dp"
+                    carta:mainColor="@color/colorPrimary"
+                    carta:mainText="2016 제 51회 전국기능경기대회"
                     carta:mainTextSize="15sp"
-                    carta:subColor="@color/colorPrimary"
-                    carta:subText="게임"
-                    carta:subTextSize="22sp" />
-
-                <kr.edcan.alime.views.CartaDoubleTextView
-                    android:id="@+id/mainDashboardUsername"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/common_padding"
-                    carta:mainText="참가자명"
-                    carta:mainTextSize="15sp"
-                    carta:subColor="@color/colorPrimary"
-                    carta:subText="김영환"
-                    carta:subTextSize="22sp" />
-
-                <kr.edcan.alime.views.CartaDoubleTextView
-                    android:id="@+id/mainDashboardCompDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/common_padding"
-                    carta:mainText="대회일"
-                    carta:mainTextSize="15sp"
-                    carta:subColor="@color/colorPrimary"
+                    carta:subColor="@color/notSelectedTextColor"
                     carta:subText="2016.09.05"
                     carta:subTextSize="22sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#44565657" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:id="@+id/mainDashboardTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
+                        android:text="09:42"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="65dp" />
+
+                    <kr.edcan.alime.views.CartaDoubleTextView
+                        android:id="@+id/mainDashboardTimeInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/mainDashboardTime"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/mainDashboardTime"
+                        carta:mainText="AM"
+                        carta:mainTextSize="13dp"
+                        carta:subColor="@color/notSelectedTextColor"
+                        carta:subText="정보 없음"
+                        carta:subTextSize="18sp"
+                        carta:textMargin="0dp" />
+                </RelativeLayout>
+
+                <kr.edcan.alime.views.CartaTagView
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="모의대회 진행중"
+                    carta:fullMode="false"
+                    carta:themeColor="@color/colorPrimary" />
             </LinearLayout>
-        </HorizontalScrollView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_padding"
-            android:background="@drawable/round_square_10dp"
-            android:orientation="vertical"
-            android:padding="30dp">
-
-            <kr.edcan.alime.views.CartaDoubleTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                carta:mainColor="@color/colorPrimary"
-                carta:mainText="2016 제 51회 전국기능경기대회"
-                carta:mainTextSize="15sp"
-                carta:subColor="@color/notSelectedTextColor"
-                carta:subText="58일 남음"
-                carta:subTextSize="22sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#44565657" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="18dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-                <TextView
-                    android:id="@+id/mainDashboardTime"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/soochick"
+                    android:layout_width="1dp"
                     android:layout_height="wrap_content"
-                    android:gravity="bottom"
-                    android:text="09:42"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="65dp" />
+                    android:layout_weight="1"
+                    android:background="@drawable/round_square_10dp_fullmode"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp">
 
-                <kr.edcan.alime.views.CartaDoubleTextView
-                    android:id="@+id/mainDashboardTimeInfo"
-                    android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:src="@drawable/ic_main_rules" />
+
+                        <kr.edcan.alime.views.CartaDoubleTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            carta:mainColor="#FFF"
+                            carta:mainText="경기"
+                            carta:mainTextSize="13dp"
+                            carta:subColor="#FFF"
+                            carta:subText="운영수칙 보기"
+                            carta:subTextSize="13dp"
+                            carta:textMargin="0dp"></kr.edcan.alime.views.CartaDoubleTextView>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/goodinfo"
+                    android:layout_width="1dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/mainDashboardTime"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/mainDashboardTime"
-                    carta:mainText="AM"
-                    carta:mainTextSize="13dp"
-                    carta:subColor="@color/notSelectedTextColor"
-                    carta:subText="게임 개발"
-                    carta:subTextSize="18sp"
-                    carta:textMargin="0dp" />
-            </RelativeLayout>
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_square_10dp"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp">
 
-            <kr.edcan.alime.views.CartaTagView
-                android:layout_width="200dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:src="@drawable/ic_main_tips" />
+
+                        <kr.edcan.alime.views.CartaDoubleTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            carta:mainColor="@color/colorPrimary"
+                            carta:mainText="경기관련"
+                            carta:mainTextSize="13dp"
+                            carta:subColor="@color/colorPrimary"
+                            carta:subText="유용한 정보"
+                            carta:subTextSize="13dp"
+                            carta:textMargin="0dp" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="모의대회 시작하기"
-                carta:fullMode="false"
-                carta:themeColor="@color/colorPrimary" />
+                android:text="갤러리"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <com.android.volley.toolbox.NetworkImageView
+                    android:id="@+id/network1"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <com.android.volley.toolbox.NetworkImageView
+                    android:id="@+id/network2"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1" />
+
+                <com.android.volley.toolbox.NetworkImageView
+                    android:id="@+id/network3"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <RelativeLayout
-                android:layout_width="1dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/round_square_10dp_fullmode"
-                android:paddingBottom="16dp"
-                android:paddingTop="16dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="16dp"
-                        android:src="@drawable/ic_main_rules" />
-
-                    <kr.edcan.alime.views.CartaDoubleTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        carta:mainColor="#FFF"
-                        carta:mainText="경기"
-                        carta:mainTextSize="13dp"
-                        carta:subColor="#FFF"
-                        carta:subText="운영수칙 보기"
-                        carta:subTextSize="13dp"
-                        carta:textMargin="0dp"></kr.edcan.alime.views.CartaDoubleTextView>
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="1dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/round_square_10dp"
-                android:paddingBottom="16dp"
-                android:paddingTop="16dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="16dp"
-                        android:src="@drawable/ic_main_tips" />
-
-                    <kr.edcan.alime.views.CartaDoubleTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        carta:mainColor="@color/colorPrimary"
-                        carta:mainText="경기관련"
-                        carta:mainTextSize="13dp"
-                        carta:subColor="@color/colorPrimary"
-                        carta:subText="유용한 정보"
-                        carta:subTextSize="13dp"
-                        carta:textMargin="0dp" />
-                </LinearLayout>
-            </RelativeLayout>
-        </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </layout>

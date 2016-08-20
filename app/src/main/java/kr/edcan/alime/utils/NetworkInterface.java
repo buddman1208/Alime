@@ -5,6 +5,7 @@ import java.util.List;
 
 import kr.edcan.alime.models.Question;
 import kr.edcan.alime.models.User;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -47,7 +48,7 @@ public interface NetworkInterface {
 
     @POST("/question/replyArticle")
     @FormUrlEncoded
-    Call<String> replyQuestion(
+    Call<ResponseBody> replyQuestion(
             @Field("userid") String userid,
             @Field("articleid") String articleid,
             @Field("content") String content
@@ -55,7 +56,7 @@ public interface NetworkInterface {
 
     @POST("/question/deleteArticle")
     @FormUrlEncoded
-    Call<String> deleteQuestion(
+    Call<ResponseBody> deleteQuestion(
             @Field("userid") String userid,
             @Field("articleid") String articleid
     );

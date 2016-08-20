@@ -24,6 +24,12 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/mainPrizeRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="15dp"
+            android:text="더 자세한 사항은\n기능경기대회 홈페이지를 참고해주세요!"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </layout>

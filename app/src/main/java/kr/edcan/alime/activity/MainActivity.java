@@ -27,18 +27,36 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import kr.edcan.alime.R;
 import kr.edcan.alime.adapters.NoticeListAdapter;
 import kr.edcan.alime.adapters.PrizeRecyclerView;
+import kr.edcan.alime.adapters.QuestionListAdapter;
 import kr.edcan.alime.databinding.ActivityMainBinding;
 import kr.edcan.alime.models.PageList;
 import kr.edcan.alime.models.PrizeData;
+import kr.edcan.alime.models.Question;
+import kr.edcan.alime.utils.AlimeUtils;
 import kr.edcan.alime.utils.DataManager;
+import kr.edcan.alime.utils.ImageSingleton;
+import kr.edcan.alime.utils.NetworkHelper;
+import kr.edcan.alime.utils.NetworkInterface;
 import kr.edcan.alime.utils.SkillPageParser;
+import kr.edcan.alime.views.CartaDoubleTextView;
+import kr.edcan.alime.views.CartaTagView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     static int maxNoticePage = 1;
     String[] titleArr = new String[]{"메인 보드", "공지사항", "질문과 답변", "시상 및 특전"};
     ActivityMainBinding mainBind;
-    ViewPager mainPager;
+    static public ViewPager mainPager;
     DrawerLayout mainDrawer;
     TabLayout mainTabLayout;
 
@@ -63,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         // Widgets
         mainPager = mainBind.mainViewPager;
         mainTabLayout = mainBind.mainTabLayout;
-        mainDrawer = mainBind.mainDrawer;
         setSupportActionBar(mainBind.toolbar);
         mainPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
         mainTabLayout.setupWithViewPager(mainPager);
@@ -87,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         ListView noticeListView, QNAListView;
         Context context;
         RecyclerView prizeView;
-        ArrayList<PrizeData> prizeArr = new ArrayList<>();
+        ArrayList<PrizeData> prizeArr;
         DataManager manager;
 
         public static MainFragment newInstance(int pageNum) {
@@ -100,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            prizeArr = new ArrayList<>();
             prizeArr.add(new PrizeData("1위", "금메달", "1200", "노동부장관상"));
             prizeArr.add(new PrizeData("2위", "은메달", "800", "대회장상"));
             prizeArr.add(new PrizeData("3위", "동메달", "400", "대회장상"));
@@ -119,6 +137,42 @@ public class MainActivity extends AppCompatActivity {
         public void setPage(View view, int position) {
             switch (position) {
                 case 0:
+                    TextView time = (TextView) view.findViewById(R.id.mainDashboardTime);
+                    Date date = new Date(System.currentTimeMillis());
+                    time.setText(date.getHours() + ":" + date.getMinutes());
+                    CartaDoubleTextView name, type, timeinfo;
+                    timeinfo = (CartaDoubleTextView) view.findViewById(R.id.mainDashboardTimeInfo);
+                    Calendar c = Calendar.getInstance();
+                    timeinfo.setPrimaryText(((c.AM_PM) == Calendar.AM) ? "AM" : "PM");
+                    name = (CartaDoubleTextView) view.findViewById(R.id.mainDashboardUsername);
+                    type = (CartaDoubleTextView) view.findViewById(R.id.mainDashboardCategory);
+                    if (manager.getActiveUser().first) {
+                        timeinfo.setSubText(AlimeUtils.getType()[manager.getActiveUser().second.getAttendType()] + " 분야");
+                        name.setSubText(manager.getActiveUser().second.getUsername());
+                        type.setSubText(AlimeUtils.getType()[manager.getActiveUser().second.getAttendType()]);
+                    }
+                    RelativeLayout soochick, goodinfo;
+                    soochick = (RelativeLayout) view.findViewById(R.id.soochick);
+                    goodinfo = (RelativeLayout) view.findViewById(R.id.goodinfo);
+                    soochick.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            startActivity(new Intent(getContext(), SoochickActivity.class));
+                        }
+                    });
+                    goodinfo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mainPager.setCurrentItem(2, true);
+                        }
+                    });
+                    NetworkImageView im1, im2, im3;
+                    im1 = (NetworkImageView) view.findViewById(R.id.network1);
+                    im2 = (NetworkImageView) view.findViewById(R.id.network2);
+                    im3 = (NetworkImageView) view.findViewById(R.id.network3);
+                    im1.setImageUrl("http://skill.hrdkorea.or.kr/servlet/image/compet_picture/201508311623001441005780598.jpg", ImageSingleton.getInstance(context).getImageLoader());
+                    im2.setImageUrl("http://skill.hrdkorea.or.kr/servlet/image/compet_picture/201508311622321441005752596.jpg", ImageSingleton.getInstance(context).getImageLoader());
+                    im3.setImageUrl("http://skill.hrdkorea.or.kr/servlet/image/compet_picture/201508311631291441006289261.jpg", ImageSingleton.getInstance(context).getImageLoader());
                     break;
                 case 1:
                     noticeListView = (ListView) view.findViewById(R.id.mainNoticeListView);
@@ -149,8 +203,53 @@ public class MainActivity extends AppCompatActivity {
                     });
                     break;
                 case 2:
+                    CartaTagView post = (CartaTagView) view.findViewById(R.id.mainQNAConfirm);
+                    post.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            startActivity(new Intent(getContext(), NewQuestion.class));
+                        }
+                    });
+                    final ListView listView = (ListView) view.findViewById(R.id.mainQNAListView);
+                    final ArrayList<Question> arr = new ArrayList<>();
+                    NetworkInterface service = NetworkHelper.getNetworkInstance();
                     TextView loginRequest = (TextView) view.findViewById(R.id.questionLoginRequest);
                     loginRequest.setVisibility((manager.getActiveUser().first) ? View.GONE : View.VISIBLE);
+                    if (manager.getActiveUser().first) {
+                        if (manager.getActiveUser().second.isAdmin()) post.setVisibility(View.GONE);
+                        final Call<List<Question>> questionList = service.listQuestion();
+                        questionList.enqueue(new Callback<List<Question>>() {
+                            @Override
+                            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+                                switch (response.code()) {
+                                    case 200:
+                                        for (Question q : response.body()) {
+                                            arr.add(q);
+                                        }
+                                        if (arr.size() == 0)
+                                            Toast.makeText(getContext(), "등록된 질문이 없습니다", Toast.LENGTH_SHORT).show();
+                                        listView.setAdapter(new QuestionListAdapter(getContext(), arr));
+                                        break;
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<Question>> call, Throwable t) {
+                                Log.e("asdf", t.getMessage());
+                            }
+                        });
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                startActivity(new Intent(getContext(), QuestionViewActivity.class)
+                                        .putExtra("title", arr.get(i).getTitle())
+                                        .putExtra("date", arr.get(i).getDate().toLocaleString())
+                                        .putExtra("content", arr.get(i).getContent())
+                                        .putExtra("noticeid", arr.get(i).getArticleid())
+                                        .putExtra("reply", arr.get(i).getReply()));
+                            }
+                        });
+                    }
                     break;
                 case 3:
                     prizeView = (RecyclerView) view.findViewById(R.id.mainPrizeRecyclerView);

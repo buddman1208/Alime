@@ -149,7 +149,11 @@ public class MainActivity extends AppCompatActivity {
                     if (manager.getActiveUser().first) {
                         timeinfo.setSubText(AlimeUtils.getType()[manager.getActiveUser().second.getAttendType()] + " 분야");
                         name.setSubText(manager.getActiveUser().second.getUsername());
-                        type.setSubText(AlimeUtils.getType()[manager.getActiveUser().second.getAttendType()]);
+                        type.setSubText(
+                                (manager.getActiveUser().second.isAdmin())
+                                        ? "관리자"
+                                        : AlimeUtils.getType()[manager.getActiveUser().second.getAttendType()]
+                        );
                     }
                     RelativeLayout soochick, goodinfo;
                     soochick = (RelativeLayout) view.findViewById(R.id.soochick);

@@ -272,6 +272,7 @@ public class MainActivity extends AppCompatActivity {
                                         .putExtra("date", arr.get(i).getDate().toLocaleString())
                                         .putExtra("content", arr.get(i).getContent())
                                         .putExtra("noticeid", arr.get(i).getArticleid())
+                                        .putExtra("author", arr.get(i).getAuthor())
                                         .putExtra("reply", arr.get(i).getReply()));
                             }
                         });

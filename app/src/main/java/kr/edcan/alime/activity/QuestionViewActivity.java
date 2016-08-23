@@ -39,7 +39,7 @@ public class QuestionViewActivity extends AppCompatActivity {
     SkillPageParser parser;
     ArrayList<String> pageContent;
     MaterialDialog loading;
-    String noticeid;
+    String noticeid, author;
     ActivityQuestionViewBinding noticeBinding;
     DataManager manager;
     Toolbar toolbar;
@@ -65,6 +65,7 @@ public class QuestionViewActivity extends AppCompatActivity {
         noticeBinding.questionTitle.setPrimaryText(intent.getStringExtra("title"));
         noticeBinding.questionTitle.setSubText(intent.getStringExtra("date"));
         noticeid = intent.getStringExtra("noticeid");
+        author = intent.getStringExtra("author");
         noticeBinding.questionContent.setText(intent.getStringExtra("content"));
         noticeBinding.questionReply.setVisibility(View.VISIBLE);
         noticeBinding.questionReply.setSubText((reply.equals("") ? "관리자로부터 등록된 답변이 없습니다." : reply));
@@ -74,6 +75,8 @@ public class QuestionViewActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         if (manager.getActiveUser().second.isAdmin())
             getMenuInflater().inflate(R.menu.question_menu, menu);
+        if (author.equals(manager.getActiveUser().second.getId()))
+            getMenuInflater().inflate(R.menu.question_usermenu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -82,6 +85,27 @@ public class QuestionViewActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                break;
+            case R.id.questionDelete:
+                Call<ResponseBody> deleteQuestion = service.deleteQuestion(manager.getActiveUser().second.getId(), noticeid);
+                deleteQuestion.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        switch (response.code()) {
+                            case 200:
+                                Toast.makeText(QuestionViewActivity.this, "답변이 정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
+                                finish();
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.e("asdf", t.getMessage());
+                        Toast.makeText(QuestionViewActivity.this, "서버와의 통신에 문제가있습니다\n관리자에게 문의해주세요.", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
                 break;
             case R.id.answer:
                 final EditText view = (EditText) View.inflate(getApplicationContext(), R.layout.custom_dialog, null);

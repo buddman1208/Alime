@@ -161,7 +161,8 @@ public class MainActivity extends AppCompatActivity {
                     name = (CartaDoubleTextView) view.findViewById(R.id.mainDashboardUsername);
                     type = (CartaDoubleTextView) view.findViewById(R.id.mainDashboardCategory);
                     if (manager.getActiveUser().first) {
-                        timeinfo.setSubText(AlimeUtils.getType()[manager.getActiveUser().second.getAttendType()] + " 분야");
+                        timeinfo.setSubText((manager.getActiveUser().second.isAdmin())
+                                ? "관리자" : AlimeUtils.getType()[manager.getActiveUser().second.getAttendType()] + " 분야");
                         name.setSubText(manager.getActiveUser().second.getUsername());
                         type.setSubText(
                                 (manager.getActiveUser().second.isAdmin())

@@ -3,6 +3,7 @@ package kr.edcan.alime.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -29,6 +31,7 @@ public class MyPageActivity extends AppCompatActivity {
 
     Pair<Boolean, User> activeUser;
     ListView listView;
+    ImageView logo;
     DataManager manager;
     ArrayList<String> listArr = new ArrayList<>();
 
@@ -44,6 +47,8 @@ public class MyPageActivity extends AppCompatActivity {
         manager.initializeManager(getApplicationContext());
         activeUser = manager.getActiveUser();
         listView = (ListView) findViewById(R.id.myPageListView);
+        logo = (ImageView) findViewById(R.id.myPageLogo);
+        logo.setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         arrayAdapter.add(activeUser.first ? "로그아웃" : "로그인");
         listView.setAdapter(arrayAdapter);

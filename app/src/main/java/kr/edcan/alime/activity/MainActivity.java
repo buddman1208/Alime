@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -85,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mainBind.toolbar);
         manager = new DataManager();
         manager.initializeManager(this);
-        mainPager.setCurrentItem(manager.getInt("currentPage"));
         mainPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
         mainTabLayout.setupWithViewPager(mainPager);
+        mainPager.setCurrentItem(manager.getInt("currentPage"));
     }
 
     private void loadDataFromServer() {
@@ -138,6 +139,15 @@ public class MainActivity extends AppCompatActivity {
             return view;
         }
 
+        public View.OnClickListener imageClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "http://skill.hrdkorea.or.kr/information/in002.action";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+            }
+        };
+
         public void setPage(View view, int position) {
             switch (position) {
                 case 0:
@@ -181,6 +191,10 @@ public class MainActivity extends AppCompatActivity {
                     im1.setImageUrl("http://skill.hrdkorea.or.kr/servlet/image/compet_picture/201508311623001441005780598.jpg", ImageSingleton.getInstance(context).getImageLoader());
                     im2.setImageUrl("http://skill.hrdkorea.or.kr/servlet/image/compet_picture/201508311622321441005752596.jpg", ImageSingleton.getInstance(context).getImageLoader());
                     im3.setImageUrl("http://skill.hrdkorea.or.kr/servlet/image/compet_picture/201508311631291441006289261.jpg", ImageSingleton.getInstance(context).getImageLoader());
+                    im1.setOnClickListener(imageClick);
+                    im2.setOnClickListener(imageClick);
+                    im3.setOnClickListener(imageClick);
+
                     break;
                 case 1:
                     noticeListView = (ListView) view.findViewById(R.id.mainNoticeListView);
@@ -224,7 +238,10 @@ public class MainActivity extends AppCompatActivity {
                     TextView loginRequest = (TextView) view.findViewById(R.id.questionLoginRequest);
                     loginRequest.setVisibility((manager.getActiveUser().first) ? View.GONE : View.VISIBLE);
                     if (manager.getActiveUser().first) {
-                        if (manager.getActiveUser().second.isAdmin()) post.setVisibility(View.GONE);
+                        if (manager.getActiveUser().second.isAdmin()) {
+                            post.setVisibility(View.GONE);
+                            view.findViewById(R.id.mainQNAConfirmLayout).setVisibility(View.GONE);
+                        }
                         final Call<List<Question>> questionList = service.listQuestion();
                         questionList.enqueue(new Callback<List<Question>>() {
                             @Override

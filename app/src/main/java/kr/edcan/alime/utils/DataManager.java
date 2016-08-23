@@ -35,6 +35,10 @@ public class DataManager {
         editor.putString(key, data);
         editor.apply();
     }
+    public void save(String key, int data) {
+        editor.putInt(key, data);
+        editor.apply();
+    }
 
     public void saveUser(User user) {
         editor.putBoolean(HAS_ACTIVE_USER, true);

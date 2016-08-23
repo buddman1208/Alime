@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout mainDrawer;
     TabLayout mainTabLayout;
 
+    DataManager manager;
     static SkillPageParser parser;
     static ArrayList<PageList> pageList;
 
@@ -82,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
         mainPager = mainBind.mainViewPager;
         mainTabLayout = mainBind.mainTabLayout;
         setSupportActionBar(mainBind.toolbar);
+        manager = new DataManager();
+        manager.initializeManager(this);
+        mainPager.setCurrentItem(manager.getInt("currentPage"));
         mainPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
         mainTabLayout.setupWithViewPager(mainPager);
     }
@@ -139,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     TextView time = (TextView) view.findViewById(R.id.mainDashboardTime);
                     Date date = new Date(System.currentTimeMillis());
-                    time.setText(date.getHours() + ":" + date.getMinutes());
+                    time.setText(((date.getHours() < 10) ? "0" + date.getHours() : date.getHours()) + ":" + ((date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes()));
                     CartaDoubleTextView name, type, timeinfo;
                     timeinfo = (CartaDoubleTextView) view.findViewById(R.id.mainDashboardTimeInfo);
                     Calendar c = Calendar.getInstance();
@@ -314,6 +318,12 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        manager.save("currentPage", mainPager.getCurrentItem());
+        super.onPause();
     }
 
     @Override

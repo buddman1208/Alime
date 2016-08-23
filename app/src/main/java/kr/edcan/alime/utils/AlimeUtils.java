@@ -22,4 +22,11 @@ public class AlimeUtils {
         if (position > type.length) return "";
         return type[position];
     }
+
+    public String getCurrentWork(int hour) {
+        if (hour >= 9 && hour < 13) return "게임개발";
+        else if (hour >= 13 && hour < 14) return "식사";
+        else if (hour >= 14 && hour < 18) return "게임개발";
+        return "일정 없음";
+    }
 }

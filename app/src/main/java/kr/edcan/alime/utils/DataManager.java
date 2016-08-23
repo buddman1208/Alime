@@ -35,6 +35,7 @@ public class DataManager {
         editor.putString(key, data);
         editor.apply();
     }
+
     public void save(String key, int data) {
         editor.putInt(key, data);
         editor.apply();
@@ -81,6 +82,14 @@ public class DataManager {
 
     public boolean isFirst() {
         return preferences.getBoolean("IS_FIRST", true);
+    }
+
+    public boolean isPlaying() {
+        return preferences.getBoolean("isPlaying", false);
+    }
+    public void changePlayingStatus(){
+        editor.putBoolean("isPlaying", !isPlaying());
+        editor.apply();
     }
 
     public void notFirst() {

@@ -111,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView prizeView;
         ArrayList<PrizeData> prizeArr;
         DataManager manager;
+        AlimeUtils utils;
+
 
         public static MainFragment newInstance(int pageNum) {
             Bundle args = new Bundle();
@@ -135,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
             View view = DataBindingUtil.inflate(inflater, layout[position], container, false).getRoot();
             manager = new DataManager();
             manager.initializeManager(getContext());
+            utils = new AlimeUtils();
             setPage(view, position);
             return view;
         }
@@ -152,9 +155,9 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     TextView time = (TextView) view.findViewById(R.id.mainDashboardTime);
-                    Date date = new Date(System.currentTimeMillis());
+                    final Date date = new Date(System.currentTimeMillis());
                     time.setText(((date.getHours() < 10) ? "0" + date.getHours() : date.getHours()) + ":" + ((date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes()));
-                    CartaDoubleTextView name, type, timeinfo;
+                    final CartaDoubleTextView name, type, timeinfo;
                     timeinfo = (CartaDoubleTextView) view.findViewById(R.id.mainDashboardTimeInfo);
                     Calendar c = Calendar.getInstance();
                     timeinfo.setPrimaryText(((c.AM_PM) == Calendar.AM) ? "AM" : "PM");
@@ -162,13 +165,16 @@ public class MainActivity extends AppCompatActivity {
                     type = (CartaDoubleTextView) view.findViewById(R.id.mainDashboardCategory);
                     if (manager.getActiveUser().first) {
                         timeinfo.setSubText((manager.getActiveUser().second.isAdmin())
-                                ? "관리자" : AlimeUtils.getType()[manager.getActiveUser().second.getAttendType()] + " 분야");
+                                ? "관리자" : "일정 없음");
                         name.setSubText(manager.getActiveUser().second.getUsername());
                         type.setSubText(
                                 (manager.getActiveUser().second.isAdmin())
                                         ? "관리자"
                                         : AlimeUtils.getType()[manager.getActiveUser().second.getAttendType()]
                         );
+                    }
+                    if (manager.isPlaying()) {
+                        timeinfo.setSubText(utils.getCurrentWork(date.getHours()));
                     }
                     RelativeLayout soochick, goodinfo;
                     soochick = (RelativeLayout) view.findViewById(R.id.soochick);
@@ -183,6 +189,19 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             mainPager.setCurrentItem(2, true);
+                        }
+                    });
+                    view.findViewById(R.id.mainDashboardStartStop).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (manager.isPlaying()) {
+                                timeinfo.setSubText("일정 없음");
+                                ((TextView)view.findViewById(R.id.mainDashboardStartStop)).setText("모의대회 시작하기");
+                            } else {
+                                timeinfo.setSubText(utils.getCurrentWork(date.getHours()));
+                                ((TextView)view.findViewById(R.id.mainDashboardStartStop)).setText("모의대회 중지하기");
+                            }
+                            manager.changePlayingStatus();
                         }
                     });
                     NetworkImageView im1, im2, im3;

@@ -25,6 +25,7 @@ public class AuthActivity extends AppCompatActivity {
     NetworkInterface service;
     ActivityAuthBinding binding;
     DataManager manager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,29 +40,32 @@ public class AuthActivity extends AppCompatActivity {
         binding.loginLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userLogin = service.userLogin(binding.loginId.getText().toString().trim(),
-                        binding.loginPassword.getText().toString().trim());
-                userLogin.enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        switch (response.code()){
-                            case 200:
-                                manager.saveUser(response.body());
-                                finish();
-                                break;
-                            case 400:
-                                Toast.makeText(AuthActivity.this, "아이디 혹은 비밀번호가 잘못되었습니다.", Toast.LENGTH_SHORT).show();
-                                break;
+                if (!binding.loginId.getText().toString().trim().isEmpty() && !binding.loginPassword.getText().toString().trim().isEmpty()) {
+                    userLogin = service.userLogin(binding.loginId.getText().toString().trim(),
+                            binding.loginPassword.getText().toString().trim());
+                    userLogin.enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+                            switch (response.code()) {
+                                case 200:
+                                    manager.saveUser(response.body());
+                                    finish();
+                                    break;
+                                case 400:
+                                    Toast.makeText(AuthActivity.this, "아이디 혹은 비밀번호가 잘못되었습니다.", Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+
                         }
 
-                    }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Log.e("asdf", t.getMessage());
-                        Toast.makeText(AuthActivity.this, "서버와의 연결에 문제가 있습니다.\n이 문제가 지속될 시, 서비스 관리자에게 문의해주세요.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                            Log.e("asdf", t.getMessage());
+                            Toast.makeText(AuthActivity.this, "서버와의 연결에 문제가 있습니다.\n이 문제가 지속될 시, 서비스 관리자에게 문의해주세요.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else
+                    Toast.makeText(AuthActivity.this, "공백 없이 입력해주세요!", Toast.LENGTH_SHORT).show();
             }
         });
         binding.loginRegister.setOnClickListener(new View.OnClickListener() {

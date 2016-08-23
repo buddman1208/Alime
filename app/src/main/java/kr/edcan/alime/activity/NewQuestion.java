@@ -29,6 +29,7 @@ public class NewQuestion extends AppCompatActivity {
     DataManager manager;
     Toolbar toolbar;
     Call<Question> newQuestion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,41 +43,46 @@ public class NewQuestion extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         manager = new DataManager();
         manager.initializeManager(this);
-        post= (Button) findViewById(R.id.post);
+        post = (Button) findViewById(R.id.post);
         title = (EditText) findViewById(R.id.title);
         content = (EditText) findViewById(R.id.content);
         service = NetworkHelper.getNetworkInstance();
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                newQuestion = service.postQuestion(title.getText().toString().trim(), new Date(System.currentTimeMillis()),
-                        content.getText().toString().trim(), manager.getActiveUser().second.getId(), "");
-                newQuestion.enqueue(new Callback<Question>() {
-                    @Override
-                    public void onResponse(Call<Question> call, Response<Question> response) {
-                        switch (response.code()){
-                            case 200:
-                                Toast.makeText(NewQuestion.this, "질문이 정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
-                                finish();
-                                break;
-                            case 400:
-                                Toast.makeText(NewQuestion.this, "문제가 발생했습니다 관리자에게 문의해주세요", Toast.LENGTH_SHORT).show();
+                String titleText = title.getText().toString().trim();
+                String contentText = content.getText().toString().trim();
+                if (!titleText.isEmpty() && !contentText.isEmpty()) {
+                    newQuestion = service.postQuestion(titleText, new Date(System.currentTimeMillis()),
+                            contentText, manager.getActiveUser().second.getId(), "");
+                    newQuestion.enqueue(new Callback<Question>() {
+                        @Override
+                        public void onResponse(Call<Question> call, Response<Question> response) {
+                            switch (response.code()) {
+                                case 200:
+                                    Toast.makeText(NewQuestion.this, "질문이 정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                    break;
+                                case 400:
+                                    Toast.makeText(NewQuestion.this, "문제가 발생했습니다 관리자에게 문의해주세요", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<Question> call, Throwable t) {
-                        Log.e("asdf", t.getMessage());
-                        Toast.makeText(NewQuestion.this, "문제가 발생했습니다 관리자에게 문의해주세요", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<Question> call, Throwable t) {
+                            Log.e("asdf", t.getMessage());
+                            Toast.makeText(NewQuestion.this, "문제가 발생했습니다 관리자에게 문의해주세요", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else
+                    Toast.makeText(getApplicationContext(), "공백 없이 입력해주세요!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;

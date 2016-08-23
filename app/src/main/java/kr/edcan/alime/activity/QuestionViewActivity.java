@@ -61,6 +61,7 @@ public class QuestionViewActivity extends AppCompatActivity {
         String reply = intent.getStringExtra("reply");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         noticeBinding.questionTitle.setPrimaryText(intent.getStringExtra("title"));
         noticeBinding.questionTitle.setSubText(intent.getStringExtra("date"));
         noticeid = intent.getStringExtra("noticeid");
@@ -92,29 +93,32 @@ public class QuestionViewActivity extends AppCompatActivity {
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                Call<ResponseBody> reply = service.replyQuestion(
-                                        manager.getActiveUser().second.getId(),
-                                        noticeid,
-                                        view.getText().toString().trim()
-                                );
-                                reply.enqueue(new Callback<ResponseBody>() {
-                                    @Override
-                                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                        Log.e("asdf", response.code() + "");
-                                        switch (response.code()) {
-                                            case 200:
-                                                Toast.makeText(QuestionViewActivity.this, "답변이 정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
-                                                finish();
-                                                break;
+                                if (!view.getText().toString().trim().equals("")) {
+                                    Call<ResponseBody> reply = service.replyQuestion(
+                                            manager.getActiveUser().second.getId(),
+                                            noticeid,
+                                            view.getText().toString().trim()
+                                    );
+                                    reply.enqueue(new Callback<ResponseBody>() {
+                                        @Override
+                                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                            Log.e("asdf", response.code() + "");
+                                            switch (response.code()) {
+                                                case 200:
+                                                    Toast.makeText(QuestionViewActivity.this, "답변이 정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                    break;
+                                            }
                                         }
-                                    }
 
-                                    @Override
-                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                        Log.e("asdf", t.getMessage());
-                                        Toast.makeText(QuestionViewActivity.this, "서버와의 통신에 문제가있습니다\n관리자에게 문의해주세요.", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                        @Override
+                                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                            Log.e("asdf", t.getMessage());
+                                            Toast.makeText(QuestionViewActivity.this, "서버와의 통신에 문제가있습니다\n관리자에게 문의해주세요.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                } else
+                                    Toast.makeText(QuestionViewActivity.this, "공백 없이 입력해주세요!", Toast.LENGTH_SHORT).show();
                             }
                         }).show();
         }

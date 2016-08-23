@@ -212,25 +212,58 @@
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-                <com.android.volley.toolbox.NetworkImageView
-                    android:id="@+id/network1"
+                <RelativeLayout
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1">
 
-                <com.android.volley.toolbox.NetworkImageView
-                    android:id="@+id/network2"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Loading.." />
+
+                    <com.android.volley.toolbox.NetworkImageView
+                        android:id="@+id/network1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1">
 
-                <com.android.volley.toolbox.NetworkImageView
-                    android:id="@+id/network3"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Loading.." />
+
+                    <com.android.volley.toolbox.NetworkImageView
+                        android:id="@+id/network2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Loading.." />
+
+                    <com.android.volley.toolbox.NetworkImageView
+                        android:id="@+id/network3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </RelativeLayout>
 
             </LinearLayout>
         </LinearLayout>

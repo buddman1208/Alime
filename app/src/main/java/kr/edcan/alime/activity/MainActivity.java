@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadDataFromServer() {
         parser = new SkillPageParser(MainActivity.this);
+        parser.getNoticeList(currentNoticePage);
         Pair<Integer, ArrayList<PageList>> pair = parser.getNoticeList(currentNoticePage);
         maxNoticePage = pair.first;
         pageList = pair.second;

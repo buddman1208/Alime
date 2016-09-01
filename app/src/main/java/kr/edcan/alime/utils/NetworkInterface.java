@@ -60,4 +60,10 @@ public interface NetworkInterface {
             @Field("userid") String userid,
             @Field("articleid") String articleid
     );
+
+    @POST("/question/deleteFromAdmin")
+    @FormUrlEncoded
+    Call<ResponseBody> deleteFromAdmin(
+            @Field("articleid") String articleid
+    );
 }

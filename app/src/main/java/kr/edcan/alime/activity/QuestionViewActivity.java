@@ -86,6 +86,27 @@ public class QuestionViewActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 break;
+            case R.id.deleteFromAdmin:
+                Call<ResponseBody> deleteFromAdmin = service.deleteFromAdmin(noticeid);
+                deleteFromAdmin.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        switch (response.code()) {
+                            case 200:
+                                Toast.makeText(QuestionViewActivity.this, "삭제되었습니다!", Toast.LENGTH_SHORT).show();
+                                finish();
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.e("asdf", t.getMessage());
+                        Toast.makeText(QuestionViewActivity.this, "서버와의 통신에 문제가있습니다\n관리자에게 문의해주세요.", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+                break;
             case R.id.questionDelete:
                 Call<ResponseBody> deleteQuestion = service.deleteQuestion(manager.getActiveUser().second.getId(), noticeid);
                 deleteQuestion.enqueue(new Callback<ResponseBody>() {

@@ -183,7 +183,8 @@ public class MainActivity extends AppCompatActivity {
                     soochick.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            startActivity(new Intent(getContext(), SoochickActivity.class));
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://skill.hrdkorea.or.kr/skill/wholeContents.action?contentsType=SUM")));
+//                            startActivity(new Intent(getContext(), SoochickActivity.class));
                         }
                     });
                     goodinfo.setOnClickListener(new View.OnClickListener() {
